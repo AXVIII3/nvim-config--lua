@@ -1,6 +1,6 @@
 -- Currently using folke/lazy.nvim as package manager
 
--- Bootstapping Lazy so that it gets installed if it isnt already
+-- -- Bootstapping Lazy so that it gets installed if it isnt already
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({

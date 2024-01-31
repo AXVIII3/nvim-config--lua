@@ -17,6 +17,8 @@ vim.opt.listchars:append({ trail = "◡" })
 vim.opt.list = true -- turn on visual characters for some non-visible characters like spaces and tabs
 
 -- Other Setup
+vim.opt.clipboard = "unnamedplus" -- use system clipboard as buffer
+vim.opt.incsearch = true -- update result as the search is happening instead of after
 vim.g.netrw_winsize = 20 -- netrw file drawer size
 vim.opt.autoindent = true -- auto indents code on actions
 vim.opt.smartindent = true -- smartly indents new lines
