@@ -15,7 +15,9 @@ vim.opt.listchars:append({ tab = "◦◦" }) -- character for tabs
 vim.opt.list = true -- turn on visual characters for some non-visible characters like spaces and tabs
 
 -- Other Setup
-vim.g.netrw_winsize = 20
+vim.g.netrw_winsize = 20 -- netrw file drawer size
+vim.opt.autoindent = true 
+vim.opt.smartindent = true
 vim.opt.wrapscan = true -- wrap searches around top/bottom of file
 vim.opt.writebackup = false -- no tilde files
 vim.opt.switchbuf = 'useopen' -- use an already open window if possible

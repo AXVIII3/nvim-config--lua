@@ -1,8 +1,11 @@
 -- Leader set to space
 vim.g.mapleader = " "
 
+-- Motions
+
+
 -- Netrw Keybinds 
-local isLexOpen = false
+local isLexOpen = false -- Store if the netrw drawer window is open
 vim.keymap.set("n", "<leader>q", function()
     vim.g.netrw_banner = 0
     if not isLexOpen then 
