@@ -10,6 +10,5 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setting up Lazy
 -- Plugins are downloaded setup in the seperate plugins/ directory
 require("lazy").setup("axviii3.plugins")
