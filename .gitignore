@@ -1,3 +1,7 @@
+# Non-essential dot files
+*.nvimlog
+lazy-lock.json
+
 # Undotree persistent undos
 undo_dir/
 
