@@ -1,5 +1,5 @@
 # Undotree persistent undos
-undo_tree/
+undo_dir/
 
 # Compiled Lua sources
 luac.out
