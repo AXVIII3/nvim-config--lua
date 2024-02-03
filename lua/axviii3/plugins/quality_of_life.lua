@@ -20,19 +20,6 @@ return {
         end
     },
 
-    -- Shows possible keymaps
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("which-key").setup()
-        end,
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 500
-        end,
-    },
-
     {
         "brenton-leighton/multiple-cursors.nvim",
         version = "*",
