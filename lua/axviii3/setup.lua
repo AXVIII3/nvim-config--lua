@@ -23,7 +23,7 @@ vim.opt.textwidth = 0 -- never wrap lines
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.writebackup = false -- no tilde files
-vim.opt.undodir = "G:/_OTHERS/nvim/undo_dir"
+vim.opt.undodir = "G:/_OTHERS/nvim-data/undo_dir"
 vim.opt.undofile = true -- store persistant undo files
 
 -- Searching
