@@ -1,5 +1,6 @@
 return {
     "folke/trouble.nvim",
+    keys = { "<leader>tt", "<leader>tn", "<leader>tp" },
     config = function()
         local trouble = require("trouble")
         trouble.setup()

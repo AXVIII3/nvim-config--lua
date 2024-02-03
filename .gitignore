@@ -1,3 +1,6 @@
+# Undotree persistent undos
+undo_tree/
+
 # Compiled Lua sources
 luac.out
 

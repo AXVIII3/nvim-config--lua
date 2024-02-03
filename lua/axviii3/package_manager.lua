@@ -11,4 +11,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Plugins are downloaded setup in the seperate plugins/ directory
-require("lazy").setup("axviii3.plugins")
+require("lazy").setup("axviii3.plugins", {
+    checker = {
+        enabled = true,
+        notify = false
+    },
+    change_detection = {
+        notify = false
+    }
+})
