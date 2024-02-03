@@ -2,7 +2,7 @@
 return {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
-    event = "VeryLazy",
+    keys = { "<leader>a", "<C-h>", "<C-u>", "<C-i>", "<C-o>", "<C-q>", "<C-e>" },
     config = function()
         local harpoon = require("harpoon")
 

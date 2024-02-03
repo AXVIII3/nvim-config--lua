@@ -9,8 +9,7 @@ vim.keymap.set("n", "<C-w><C-k>", ":wincmd k<cr>")
 vim.keymap.set("n", "<C-w><C-l>", ":wincmd l<cr>")
 
 -- Unhighlight everything (e.g. after searching)
-vim.keymap.set("n", "F1", ":set hls!<CR>")
-
+vim.keymap.set("n", "<F1>", ":set hls!<CR>")
 
 -- Undo
 vim.keymap.set("n", "U", vim.cmd.redo)
@@ -75,4 +74,4 @@ end)
 
 -- Plugin Remaps which cant be set in config (e.g. the plugin is lazy loaded)
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>g", vim.cmd.Git)
