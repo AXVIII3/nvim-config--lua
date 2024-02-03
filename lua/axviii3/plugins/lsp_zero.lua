@@ -78,6 +78,10 @@ return {
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     "lua_ls",
+                    "html",
+                    "eslint",
+                    "cssls",
+                    "cssmodules_ls"
                 },
                 handlers = {
                     lsp_zero.default_setup,
