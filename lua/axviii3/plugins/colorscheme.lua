@@ -3,6 +3,7 @@ return {
     lazy = false,
     config = function()
         require("onedark").setup {
+            ending_tildes = true,
             style = 'cool',
             transparent = true
         }
