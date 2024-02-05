@@ -5,7 +5,10 @@ return {
         require("onedark").setup {
             ending_tildes = true,
             style = 'cool',
-            transparent = true
+            transparent = true,
+            colors = {
+                bg0 = "#1f2229",
+            }
         }
         require('onedark').load()
     end

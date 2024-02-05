@@ -1,15 +1,23 @@
 -- Leader set to space
 vim.g.mapleader = " "
 
+-- Quitting
+vim.keymap.set("n", "<leader><C-q><C-q>", "<cmd> q<CR>")
+vim.keymap.set("n", "<leader><C-w><C-q>", "<cmd> wq<CR>")
+vim.keymap.set("n", "<leader><C-x><C-q>", "<cmd> q!<CR>")
+
+-- Writing
+vim.keymap.set("n", "<leader><C-w>", "<cmd> w<CR>")
+
 -- Split navigation
-vim.keymap.set("n", "<C-w><C-w>", ":wincmd w<cr>")
-vim.keymap.set("n", "<C-w><C-h>", ":wincmd h<cr>")
-vim.keymap.set("n", "<C-w><C-j>", ":wincmd j<cr>")
-vim.keymap.set("n", "<C-w><C-k>", ":wincmd k<cr>")
-vim.keymap.set("n", "<C-w><C-l>", ":wincmd l<cr>")
+vim.keymap.set("n", "<C-w><C-w>", "<cmd> wincmd w<cr>")
+vim.keymap.set("n", "<C-w><C-h>", "<cmd> wincmd h<cr>")
+vim.keymap.set("n", "<C-w><C-j>", "<cmd> wincmd j<cr>")
+vim.keymap.set("n", "<C-w><C-k>", "<cmd> wincmd k<cr>")
+vim.keymap.set("n", "<C-w><C-l>", "<cmd> wincmd l<cr>")
 
 -- Unhighlight everything (e.g. after searching)
-vim.keymap.set("n", "<F1>", ":set hls!<CR>")
+vim.keymap.set("n", "<leader>nh", "/sOmErAnDoMtExT<CR>")
 
 -- Undo
 vim.keymap.set("n", "U", vim.cmd.redo)
@@ -32,10 +40,21 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- Move lines/selection up or down
-vim.keymap.set("n", "<C-j>", "v :m '>+1<CR>gv=gv<esc>")
-vim.keymap.set("n", "<C-k>", "v :m '<-2<CR>gv=gv<esc>")
-vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<C-j>", "v <cmd> m '>+1<CR>gv=gv<esc>")
+vim.keymap.set("n", "<C-k>", "v <cmd> m '<-2<CR>gv=gv<esc>")
+vim.keymap.set("v", "<C-j>", "<cmd> m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<C-k>", "<cmd> m '<-2<CR>gv=gv")
+
+
+-- Noice
+vim.keymap.set("n", "<leader>nm", function()
+    local isInNoice = vim.bo.filetype == "noice"
+    if (isInNoice) then
+        vim.cmd "q"
+    else
+        vim.cmd "messages"
+    end
+end)
 
 -- Netrw
 local isLexOpen = false -- Store if the netrw drawer window is open

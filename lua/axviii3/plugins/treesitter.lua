@@ -1,12 +1,23 @@
+local ensure_installed_parsers = {
+    "html",
+    "css",
+    "javascript",
+    "c_sharp",
+    "gdscript",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query"
+}
+
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     event = "VeryLazy",
     config = function()
         require'nvim-treesitter.configs'.setup {
             -- A list of parser names, or "all" (the five listed parsers should always be installed)
-            ensure_installed = { "c_sharp", "gdscript", "lua", "vim", "vimdoc", "query" },
+            ensure_installed = ensure_installed_parsers,
 
             -- Install parsers synchronously (only applied to `ensure_installed`)
             sync_install = false,
