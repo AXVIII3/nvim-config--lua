@@ -2,7 +2,7 @@
 return {
     {
         "folke/noice.nvim",
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             require("noice").setup()
             vim.keymap.set("n", "<leader>nd", "<cmd> NoiceDismiss<CR>")
@@ -27,7 +27,7 @@ return {
     {
         -- A better and more pleasing status line
         'nvim-lualine/lualine.nvim',
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             require('lualine').setup()
         end
@@ -36,7 +36,7 @@ return {
     -- Highlights yanked text for a bit
     {
         "machakann/vim-highlightedyank",
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             vim.g.highlightedyank_highlight_duration = 500
         end
@@ -45,7 +45,7 @@ return {
     -- Adds comment shortcuts
     {
         "numToStr/Comment.nvim",
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             require('Comment').setup({
                 mappings = {
@@ -67,7 +67,7 @@ return {
     {
         -- Some netrw quality of life stuff (including icons!)
         "prichrd/netrw.nvim",
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             require("netrw").setup {
                 use_devicons = true
@@ -78,7 +78,7 @@ return {
     -- Hides stuff as set up
     {
         "laytan/cloak.nvim",
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             require('cloak').setup({
                 enabled = true,
@@ -100,7 +100,7 @@ return {
     {
         "brenton-leighton/multiple-cursors.nvim",
         version = "*",
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             require("multiple-cursors").setup()
         end,

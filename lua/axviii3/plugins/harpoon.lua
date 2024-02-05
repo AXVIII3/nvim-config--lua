@@ -1,7 +1,7 @@
 -- Primeagens imfamous harpoon quick-switcher
 return {
     "ThePrimeagen/harpoon",
-    event = "VeryLazy",
+    lazy = false,
     branch = "harpoon2",
     config = function()
         local harpoon = require("harpoon")

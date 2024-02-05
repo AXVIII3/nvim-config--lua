@@ -1,9 +1,9 @@
 return {
     "nvim-telescope/telescope-ui-select.nvim",
-    event = "VeryLazy",
+    lazy = false,
     dependencies = {
         'nvim-telescope/telescope.nvim', tag = '0.1.5', -- latest as of 30.01.24
-        event = "VeryLazy",
+        lazy = false,
         config = function()
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
