@@ -7,8 +7,6 @@ local ensure_installed_lsps = {
 
 -- Other stuff to keep installed (like linters, formatters, etc)
 local ensure_installed_others = {
-    "prettier",
-    "js-debug-adapter"
 }
 
 
@@ -26,7 +24,6 @@ return {
             return {
                 sources = {
                     null_ls.builtins.diagnostics.eslint,
-                    null_ls.builtins.formatting.prettier
                 },
                 on_attach = function(client, bufnr)
                     if client.supports_method("textDocument/formatting") then
