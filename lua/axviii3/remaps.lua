@@ -17,7 +17,7 @@ vim.keymap.set("n", "<C-w><C-k>", "<cmd> wincmd k<cr>")
 vim.keymap.set("n", "<C-w><C-l>", "<cmd> wincmd l<cr>")
 
 -- Unhighlight everything (e.g. after searching)
-vim.keymap.set("n", "<leader>nh", "/sOmErAnDoMtExT<CR>")
+vim.keymap.set("n", "<leader>nh", "/cLeAr_HiGhLiGhT<CR><cmd> NoiceDismiss<CR>")
 
 -- Undo
 vim.keymap.set("n", "U", vim.cmd.redo)

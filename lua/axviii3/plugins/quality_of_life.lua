@@ -1,6 +1,21 @@
 -- I can survive without these plugins but they are great nonetheless
 return {
     {
+        "eckon/treesitter-current-functions",
+        dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-telescope/telescope.nvim" },
+        config = function()
+            vim.keymap.set("n", "<leader>fn", "<cmd>:GetCurrentFunctions<CR>")
+        end,
+        opts = {}
+    },
+
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {}
+    },
+
+    {
         "folke/noice.nvim",
         lazy = false,
         config = function()

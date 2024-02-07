@@ -32,7 +32,7 @@ vim.opt.wrapscan = true -- wrap searches around top/bottom of file
 
 -- Symbols for characters
 vim.opt.listchars = {} -- clear defaults
-vim.opt.listchars:append({ lead = "•" }) -- leading spaces get converted to
+vim.opt.listchars:append({ lead = "·" }) -- leading spaces get converted to
 vim.opt.listchars:append({ tab = "◦◦" }) -- tabs get converted to
 vim.opt.listchars:append({ trail = "◡" }) -- trailiing spaces get converted to
 vim.opt.list = true -- turn on visual characters for some non-visible characters like spaces and tabs
