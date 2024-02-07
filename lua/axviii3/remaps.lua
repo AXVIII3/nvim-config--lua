@@ -40,10 +40,10 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- Move lines/selection up or down
-vim.keymap.set("n", "<C-j>", "v <cmd> m '>+1<CR>gv=gv<esc>")
-vim.keymap.set("n", "<C-k>", "v <cmd> m '<-2<CR>gv=gv<esc>")
-vim.keymap.set("v", "<C-j>", "<cmd> m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<C-k>", "<cmd> m '<-2<CR>gv=gv")
+-- vim.keymap.set("n", "<C-j>", "v <cmd> m '>+1<CR>gv=gv<esc>")
+-- vim.keymap.set("n", "<C-k>", "v <cmd> m '<-2<CR>gv=gv<esc>")
+-- vim.keymap.set("v", "<C-j>", "<cmd> m '>+1<CR>gv=gv")
+-- vim.keymap.set("v", "<C-k>", "<cmd> m '<-2<CR>gv=gv")
 
 
 -- Noice
@@ -82,10 +82,12 @@ vim.keymap.set("n", "<leader>Q", function()
 
     if isLexOpen then
         vim.cmd "Lex"
-        vim.g.netrw_banner = 1
         vim.g.netrw_chgwin = -1
+        vim.g.netrw_banner = 1
         isLexOpen = false
     elseif not isLexOpen and not isInNetrw then
+        vim.g.netrw_chgwin = -1
+        vim.g.netrw_banner = 1
         vim.cmd "Ex"
     end
 end)
