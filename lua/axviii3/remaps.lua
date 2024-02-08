@@ -39,13 +39,6 @@ vim.keymap.set("n", "x", "\"_x") -- delete letter without copying
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
--- Move lines/selection up or down
--- vim.keymap.set("n", "<C-j>", "v <cmd> m '>+1<CR>gv=gv<esc>")
--- vim.keymap.set("n", "<C-k>", "v <cmd> m '<-2<CR>gv=gv<esc>")
--- vim.keymap.set("v", "<C-j>", "<cmd> m '>+1<CR>gv=gv")
--- vim.keymap.set("v", "<C-k>", "<cmd> m '<-2<CR>gv=gv")
-
-
 -- Noice
 vim.keymap.set("n", "<leader>nm", function()
     local isInNoice = vim.bo.filetype == "noice"
