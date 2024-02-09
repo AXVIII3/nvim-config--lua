@@ -10,6 +10,15 @@ vim.opt.splitright = true;                                         -- Open new v
 vim.opt.scrolloff = 10;                                            -- Keep a gap of 10 lines on the top and bottom of the screen while scrolling if available
 vim.opt.signcolumn = "yes";                                        -- A column on the left side of the editor to display code symbols
 
+vim.api.nvim_create_autocmd("TextYankPost", {                      -- Event called when any text is yanked
+    pattern = "*",
+    callback = function()                                         -- Highlihght the yanked text for the duration of timeout
+        vim.highlight.on_yank({
+            higroup = "IncSearch", timeout = 500                   -- IncSearch is the higlight group for searching
+        });
+    end
+});
+
 -- Utilities
 vim.opt.clipboard = "unnamedplus";                                 -- Use the system clipboard buffer by default 
 vim.opt.incsearch = true;                                          -- Update seach while the search if happening
@@ -34,8 +43,8 @@ vim.opt.listchars:append({ trail = "◡" });                         -- Replaces
 vim.opt.list = true;                                               -- Actualy turn on this feature
 
 -- Backup and Storing
-vim.opt.swapfile = false                                           -- Don't use a swapfile for the buffer (whatever that is)
-vim.opt.backup = false                                             -- Don't create backups of files
-vim.opt.writebackup = false                                        -- Don't create a backup of the file before overriing it
+vim.opt.swapfile = false                                           -- Don"t use a swapfile for the buffer (whatever that is)
+vim.opt.backup = false                                             -- Don"t create backups of files
+vim.opt.writebackup = false                                        -- Don"t create a backup of the file before overriing it
 vim.opt.undofile = true                                            -- Store all undos in a buffer to a file persistently
 vim.opt.undodir = settings.undofilesdir;                           -- Sets the directory to store undofile in

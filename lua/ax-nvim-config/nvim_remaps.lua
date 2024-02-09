@@ -3,17 +3,17 @@ local settings = require("settings");
 vim.g.mapleader = settings.leader;                                                           -- Special key which can use used in keymaps
 
 -- File Functions
-vim.keymap.set("n", "<C-w><C-w>", "<cmd> w<CR>");                                            -- For writing to the current buffer (saving)
-vim.keymap.set("n", "<C-q><C-q>", "<cmd> q<CR>");                                            -- For quitting normally
-vim.keymap.set("n", "<C-q><C-w>", "<cmd> wq<CR>");                                           -- For quitting after writing to the buffer
-vim.keymap.set("n", "<C-q><C-x>", "<cmd> q!<CR>");                                           -- For quitting forcefully and discarding changes (if any
+vim.keymap.set("n", "<leader>WW", "<cmd> w<CR>");                                            -- For writing to the current buffer (saving)
+vim.keymap.set("n", "<leader>QQ", "<cmd> q<CR>");                                            -- For quitting normally
+vim.keymap.set("n", "<leader>WQ", "<cmd> wq<CR>");                                           -- For quitting after writing to the buffer
+vim.keymap.set("n", "<leader>XQ", "<cmd> q!<CR>");                                           -- For quitting forcefully and discarding changes (if any
 
 -- Text Editing
-vim.keymap.set("n", "<leader>nh", "/ClEaR_hIgHlIgHtS");                                      -- Search for a random string so that the highlighting goes away
+vim.keymap.set("n", "<leader>ch", ":silent! /ClEaR_hIgHlIgHtS<CR>");                                      -- Search for a random string so that the highlighting goes away
 vim.keymap.set("n", "<leader>sw", [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]);    -- Substitute the word under the cursor
 vim.keymap.set("n", "<leader>sW", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]);   -- Substitute all the occurences of the word under the cursor
 vim.keymap.set("x", "<leader>p", "\"_dP");                                                   -- Paste without copying the text which is being replaced
-vim.keymap.set("n", "x", "\"_x");                                                            -- Don't need to copy the words while deleting them
+vim.keymap.set("n", "x", "\"_x");                                                            -- Don"t need to copy the words while deleting them
 vim.keymap.set("n", "<leader>d", "\"_d");                                                    -- Delete without copying (normal mode)
 vim.keymap.set("v", "<leader>d", "\"_d");                                                    -- Delete without copying (visual mode)
 
