@@ -1,3 +1,6 @@
+# Settings file should be excluded (as it is per device)
+settings.lua
+
 # Non-essential dot files
 *.nvimlog
 lazy-lock.json

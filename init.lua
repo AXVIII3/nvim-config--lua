@@ -1,1 +1,1 @@
-require("axviii3")
+require("ax-nvim-config")
