@@ -2,7 +2,10 @@
 
 return {
     -- Undotree for visual undoing with trees
-    "mbbill/undotree",
+    {
+        "mbbill/undotree",
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    },
 
     -- Harpoon for quick switching
     {
@@ -30,11 +33,18 @@ return {
         "nvim-treesitter/nvim-treesitter",
         name = "treesitter",
         build = ":TSUpdate",
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+        init = function(plugin)
+            require("lazy.core.loader").add_to_rtp(plugin)
+            require("nvim-treesitter.query_predicates")
+        end,
         config = require("ax-nvim-config.plugins_configs.treesitter")
     },
     {
         "eckon/treesitter-current-functions",
         dependencies = { "treesitter", "telescope" },
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function() require("tscf") end
     }
 }

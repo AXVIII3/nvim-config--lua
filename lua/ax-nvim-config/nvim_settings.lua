@@ -1,5 +1,3 @@
-local settings = require("settings");                              -- !! MAKE SURE THIS IS CONFIGURED !!
-
 -- Editor Settings
 vim.opt.number = true;                                             -- Turn on normal line number
 vim.opt.relativenumber = true;                                     -- Turn on relative line numbers
@@ -9,15 +7,7 @@ vim.opt.termguicolors = true;                                      -- Enable 24-
 vim.opt.splitright = true;                                         -- Open new vertical splits on the right side (more natural)
 vim.opt.scrolloff = 10;                                            -- Keep a gap of 10 lines on the top and bottom of the screen while scrolling if available
 vim.opt.signcolumn = "yes";                                        -- A column on the left side of the editor to display code symbols
-
-vim.api.nvim_create_autocmd("TextYankPost", {                      -- Event called when any text is yanked
-    pattern = "*",
-    callback = function()                                         -- Highlihght the yanked text for the duration of timeout
-        vim.highlight.on_yank({
-            higroup = "IncSearch", timeout = 500                   -- IncSearch is the higlight group for searching
-        });
-    end
-});
+vim.opt.laststatus = 3;                                            -- One global status line for all active windows
 
 -- Utilities
 vim.opt.clipboard = "unnamedplus";                                 -- Use the system clipboard buffer by default 
@@ -26,12 +16,20 @@ vim.opt.wrapscan = true;                                           -- Wrap aroun
 vim.opt.whichwrap:append("h");                                     -- Wrap to line above when at the start of a line and pressed h (left)
 vim.opt.whichwrap:append("l");                                     -- Wrap to line below when at the end of a line and pressed l (right)
 vim.g.netrw_winsize = 20;                                          -- Default size of the Netrw explorer when not in full-screen mode
+vim.api.nvim_create_autocmd("TextYankPost", {                      -- Event called when any text is yanked
+pattern = "*",
+callback = function()                                              -- Highlihght the yanked text for the duration of timeout
+    vim.highlight.on_yank({
+        higroup = "IncSearch", timeout = 500                       -- IncSearch is the higlight group for searching
+    });
+end
+});
 
 -- Tabs and Spaces
 vim.opt.expandtab = true;                                          -- Use actual spaces instead of tab characters
-vim.opt.tabstop = settings.spaceLength;                            -- Number of spaces a tab counts for
-vim.opt.shiftwidth = settings.spaceLength;                         -- IDK what this is for sure but similar to tabstop
-vim.opt.softtabstop = settings.spaceLength;                        -- Number of spaces a tab coutns for while performing editing operations
+vim.opt.tabstop = 4;                                               -- Number of spaces a tab counts for
+vim.opt.shiftwidth = 4;                                            -- IDK what this is for sure but similar to tabstop
+vim.opt.softtabstop = 4;                                           -- Number of spaces a tab coutns for while performing editing operations
 vim.opt.autoindent = true;                                         -- Copy indenting from the current line to the next line
 vim.opt.smartindent = true;                                        -- Smartly indent the next line based on current line and scope (ig?)
 
@@ -40,6 +38,7 @@ vim.opt.listchars = {};                                            -- Empty the 
 vim.opt.listchars:append({ lead = "·" });                          -- Replaces leading spaces with character
 vim.opt.listchars:append({ tab = "◦◦" });                          -- Replaces tabs with character(s)
 vim.opt.listchars:append({ trail = "◡" });                         -- Replaces trailing spaces with character
+vim.opt.listchars:append({ leadmultispace = "▎   " });             -- Replaces every 4 space group with this
 vim.opt.list = true;                                               -- Actualy turn on this feature
 
 -- Backup and Storing
@@ -47,4 +46,4 @@ vim.opt.swapfile = false                                           -- Don"t use 
 vim.opt.backup = false                                             -- Don"t create backups of files
 vim.opt.writebackup = false                                        -- Don"t create a backup of the file before overriing it
 vim.opt.undofile = true                                            -- Store all undos in a buffer to a file persistently
-vim.opt.undodir = settings.undofilesdir;                           -- Sets the directory to store undofile in
+vim.opt.undodir = require("settings").undofilesdir;                -- Sets the directory to store undofile in

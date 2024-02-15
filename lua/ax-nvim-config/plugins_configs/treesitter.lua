@@ -1,4 +1,5 @@
 return function()
+    require("nvim-treesitter.install").prefer_git = true;
     require"nvim-treesitter.configs".setup({
         ensure_installed = require("settings").ensure_installed_parsers,
         sync_install = false,
@@ -8,5 +9,4 @@ return function()
             additional_vim_regex_highlighting = false,
         },
     });
-    require("nvim-treesitter.install").prefer_git = true;
 end

@@ -16,10 +16,20 @@ vim.keymap.set("x", "<leader>p", "\"_dP");                                      
 vim.keymap.set("n", "x", "\"_x");                                                            -- Don"t need to copy the words while deleting them
 vim.keymap.set("n", "<leader>d", "\"_d");                                                    -- Delete without copying (normal mode)
 vim.keymap.set("v", "<leader>d", "\"_d");                                                    -- Delete without copying (visual mode)
+vim.keymap.set("n", "<leader>D", "\"_D");                                                    -- Delete without copying (everything after cursor)
+
+-- Windows
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]])                                    -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]])                                    -- make the window smaller vertically
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]])                                  -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]])                                  -- make the window smaller horizontally by pressing shift and -
 
 -- Navigation
 vim.keymap.set("n", "n", "nzzzv");                                                           -- Keep searched words in the center when navigating between them
 vim.keymap.set("n", "N", "Nzzzv");                                                           -- Same as above (in the opposite direction)
+
+-- Others
+vim.keymap.set("n", "<leader>ms", "<cmd> messages<CR>");                                     -- Open all vim messages history
 
 -- TODO: Find a better way.... Kinda slow
 -- Netrw

@@ -3,27 +3,23 @@
 return {
     -- Move lines up or down
     {
-        "echasnovski/mini.nvim",
+        "echasnovski/mini.move",
         version = '*',
-        config = require("ax-nvim-config.plugins_configs.minimove")
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+        config = function() require("mini.move").setup() end
     },
 
     -- Commenting shortcut
     {
         "numToStr/Comment.nvim",
-        config = require("ax-nvim-config.plugins_configs.comment")
+        config = function() require("Comment").setup({ mappings = { basic = false, extra = false } }) end
     },
 
     -- Multiple cursors
     {
         "brenton-leighton/multiple-cursors.nvim",
         version = "*",
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function() require("multiple-cursors").setup() end
-    },
-
-    -- Hides values in editor as defined
-    {
-        "laytan/cloak.nvim",
-        config = require("ax-nvim-config.plugins_configs.cloak")
     }
 }

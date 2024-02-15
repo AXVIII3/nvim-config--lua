@@ -1,10 +1,9 @@
-print("Welcome to NEOVIM! Happy Coding.");                                                   -- Startup message
-vim.cmd "messages";                                                                          -- Actually show the message (IDK why it doesn't show up otherwise)
-
-local augroupname = require("settings").augroupname;                                         -- Custom user auto command group name
-vim.api.nvim_create_augroup(augroupname, { clear = true });                                  -- Create a auto command group for future use
+vim.api.nvim_create_augroup(require("settings").augroupname, { clear = true });              -- Create a auto command group for future use
 if (vim.fn.argc() <= 0) then                                                                 -- If there are no arguments
-        vim.api.nvim_create_autocmd("VimEnter", { command = "Ex", group = augroupname });    -- Then open Netrw explorer when Vim loads
+        vim.api.nvim_create_autocmd("VimEnter", {                                            -- Then open Netrw explorer when Vim loads
+            command = "Ex",
+            group = require("settings").augroupname
+        });
 end
 
 require("ax-nvim-config.nvim_settings");                                                     -- Load vanilla neovim settings

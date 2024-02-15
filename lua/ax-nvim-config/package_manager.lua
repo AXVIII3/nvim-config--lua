@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazyDataPath);                                              
 
 
 require("lazy").setup("ax-nvim-config.plugins", {                                                                 -- Configure and start lazy
-    lazy = false,                                                                                                 -- I prefer no lazy loading
+    lazy = false,                                                                                                 -- Don't lazy load shit
     checker = {
         enabled = true,                                                                                           -- Automatically check for plugin updates
         notify = false                                                                                            -- But don't notfy me about it
@@ -23,7 +23,7 @@ require("lazy").setup("ax-nvim-config.plugins", {                               
 
 
 
-vim.api.nvim_create_autocmd("UIEnter", {                                                                         -- Configure keymaps for installed plugins
-    callback = function() require("ax-nvim-config.plugins_keymaps") end,
+vim.api.nvim_create_autocmd("VimEnter", {                                                                         -- Configure keymaps for installed plugins
+    callback = function() require("ax-nvim-config.plugins_remaps") end,
     group = require("settings").augroupname
 });
