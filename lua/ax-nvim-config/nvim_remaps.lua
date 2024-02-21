@@ -19,10 +19,10 @@ vim.keymap.set("v", "<leader>d", "\"_d");                                       
 vim.keymap.set("n", "<leader>D", "\"_D");                                                    -- Delete without copying (everything after cursor)
 
 -- Windows
-vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]])                                    -- make the window biger vertically
-vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]])                                    -- make the window smaller vertically
-vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]])                                  -- make the window bigger horizontally by pressing shift and =
-vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]])                                  -- make the window smaller horizontally by pressing shift and -
+vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]])                                    -- make the window biger vertically
+vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]])                                    -- make the window smaller vertically
+vim.keymap.set("n", "<M-=>", [[<cmd>horizontal resize +2<cr>]])                                  -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "<M-->", [[<cmd>horizontal resize -2<cr>]])                                  -- make the window smaller horizontally by pressing shift and -
 
 -- Navigation
 vim.keymap.set("n", "n", "nzzzv");                                                           -- Keep searched words in the center when navigating between them
@@ -30,6 +30,8 @@ vim.keymap.set("n", "N", "Nzzzv");                                              
 
 -- Others
 vim.keymap.set("n", "<leader>ms", "<cmd> messages<CR>");                                     -- Open all vim messages history
+vim.keymap.set("n", "<leader>mtp", "<cmd> !md-to-pdf %:p %:p:h/%:t:r.pdf<cr>");
+vim.keymap.set("n", "<leader>MTP", ":!md-to-pdf %:p %:p:h/%:t:r.pdf<left><left><left><left>");
 
 -- TODO: Find a better way.... Kinda slow
 -- Netrw

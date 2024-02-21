@@ -46,5 +46,10 @@ return {
         dependencies = { "treesitter", "telescope" },
         event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function() require("tscf") end
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = "treesitter",
+        event = { "BufReadPost", "BufWritePost", "BufNewFile" }
     }
 }

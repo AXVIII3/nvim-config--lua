@@ -38,7 +38,7 @@ vim.opt.listchars = {};                                            -- Empty the 
 vim.opt.listchars:append({ lead = "·" });                          -- Replaces leading spaces with character
 vim.opt.listchars:append({ tab = "◦◦" });                          -- Replaces tabs with character(s)
 vim.opt.listchars:append({ trail = "◡" });                         -- Replaces trailing spaces with character
-vim.opt.listchars:append({ leadmultispace = "▎   " });             -- Replaces every 4 space group with this
+vim.opt.listchars:append({ leadmultispace = "▎···" });             -- Replaces every 4 space group with this
 vim.opt.list = true;                                               -- Actualy turn on this feature
 
 -- Backup and Storing

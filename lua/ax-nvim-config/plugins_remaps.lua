@@ -35,6 +35,21 @@ vim.keymap.set("n", "<leader>fs", function() builtin.grep_string({ search = vim.
 vim.keymap.set("n", "<leader>tn", "<cmd> Telescope noice<CR>");                                                  -- Open noice messages in telescope
 vim.keymap.set("n", "<leader>fn", "<cmd>:GetCurrentFunctions<CR>");                                              -- Open all functions in current file with telescope
 
+-- Treesitter (Set from Treesitter Config)
+--     Incremental Selection
+--         Init Selection = <leader>ss,                                                                          -- Initialize the incremental selection
+--         Node Incremental = <leader>si                                                                         -- Increase selection to next outer node
+--         Node Decremental = <leader>sd                                                                         -- Decrement selection to next inner node
+--         Scope Incremental = <leader>SS                                                                        -- Increment selection to next outer scope
+--     Text Objects - Motions
+--         Function Outter = af                                                                                  -- Perform keymap around function
+--         Function Inner = if                                                                                   -- Perform keymap within function
+--         Class Outter = ac                                                                                     -- Perform keymap around class
+--         Class inner = ic                                                                                      -- Perform keymao within class
+--         Around Scope = as                                                                                     -- Perform keymap around scope
+--     Swap
+--         Swap Next Node = <M-J>                                                                                -- Swap places with nect node
+--         Swap Previous Node = <M-K>                                                                            --
 
 
 -- QUALITY OF LIFE -----------------------------------------------------------------------------------
@@ -62,5 +77,17 @@ vim.keymap.set("x", "<C-x>", function()                                         
     api.toggle.blockwise(vim.fn.visualmode());
 end);
 
+-- OTHERS -----------------------------------------------------------------------------------
+
 -- Cloak -----
 vim.keymap.set("n", "<leader>ct", "<cmd> CloakToggle<CR>");                                                      -- Toggles cloak"s hiding
+
+-- Markdown Preview ----
+local isMarkdownPreviewOn = false;                                                                               -- A command :MarkdownPreviewToggle exists, but it breaks shit
+vim.keymap.set("n", "<leader>mp", function()                                                                     -- To turn on and off Markdown Preview
+    if isMarkdownPreviewOn then
+        vim.cmd.MarkdownPreviewStop
+    else
+        vim.cmd.MarkdownPreview
+    end
+end);
