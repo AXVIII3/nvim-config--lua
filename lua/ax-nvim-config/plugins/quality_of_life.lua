@@ -21,5 +21,11 @@ return {
         version = "*",
         event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         config = function() require("multiple-cursors").setup() end
+    },
+
+    -- Color picker (Life saver in CSS and stuff)
+    {
+        "ziontee113/color-picker.nvim",
+        config = function() require("color-picker").setup({ ["background_highlight_group"] = "PMenu" }) end
     }
 }

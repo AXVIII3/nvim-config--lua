@@ -1,13 +1,10 @@
 return function()
     require("staline").setup({
         sections = {
-            left = {
-                " ", "right_sep", "-mode", "left_sep", " ",
-                "right_sep", "-file_name", "left_sep", " ",
-            },
+            left = { " ", "right_sep", "-mode", "left_sep", " ", },
             mid  = { "lsp" },
             right =  {
-                "right_sep", "- ", function() return { "StalineFill", vim.bo.filetype:lower() } end, "- ", "left_sep", " ",
+                "right_sep", "-file_name", "left_sep", " ",
                 "right_sep", "-line_column", "left_sep", " ",
             }
         },
@@ -39,7 +36,7 @@ return function()
             [""] = "#8068de",
             ["t"]  = "#ffffff",
             ["r"]  = "#971034",
-            ["R"]  = "#546576"
+            ["R"]  = "#e55561"
         },
 
         mode_icons = {
@@ -64,7 +61,7 @@ return function()
             ["c"]    = "c",
             ["t"]    = "t",
             ["!"]    = "!",
-            ["R"]    = "R"
+            ["R"]    = "Replace"
         },
     });
 end

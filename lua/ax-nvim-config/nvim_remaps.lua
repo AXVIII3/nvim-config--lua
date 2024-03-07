@@ -1,6 +1,7 @@
 local settings = require("settings");
 
 vim.g.mapleader = settings.leader;                                                           -- Special key which can use used in keymaps
+vim.g.maplocalleader = settings.leader;                                                      -- Special key which can use used in keymaps
 
 -- File Functions
 vim.keymap.set("n", "<leader>WW", "<cmd> w<CR>");                                            -- For writing to the current buffer (saving)
@@ -9,29 +10,49 @@ vim.keymap.set("n", "<leader>WQ", "<cmd> wq<CR>");                              
 vim.keymap.set("n", "<leader>XQ", "<cmd> q!<CR>");                                           -- For quitting forcefully and discarding changes (if any
 
 -- Text Editing
-vim.keymap.set("n", "<leader>ch", ":silent! /ClEaR_hIgHlIgHtS<CR>");                                      -- Search for a random string so that the highlighting goes away
+vim.keymap.set("n", "<leader>ch", ":silent! /ClEaR_hIgHlIgHtS<CR>");                         -- Search for a random string so that the highlighting goes away
 vim.keymap.set("n", "<leader>sw", [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]);    -- Substitute the word under the cursor
 vim.keymap.set("n", "<leader>sW", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]);   -- Substitute all the occurences of the word under the cursor
 vim.keymap.set("x", "<leader>p", "\"_dP");                                                   -- Paste without copying the text which is being replaced
+vim.keymap.set("n", "<leader>P", "yyp");                                                     -- Copy down to the next line
 vim.keymap.set("n", "x", "\"_x");                                                            -- Don"t need to copy the words while deleting them
 vim.keymap.set("n", "<leader>d", "\"_d");                                                    -- Delete without copying (normal mode)
 vim.keymap.set("v", "<leader>d", "\"_d");                                                    -- Delete without copying (visual mode)
+vim.keymap.set("n", "dW", "bdw");                                                            -- Delete word from anywhere inside the word
+vim.keymap.set("n", "<leader>dW", "b\"_dw");                                                 -- Delete word from anywhere inside the word without copying
 vim.keymap.set("n", "<leader>D", "\"_D");                                                    -- Delete without copying (everything after cursor)
+vim.keymap.set("n", "<leader>o", "o<esc>");                                                  -- Create new line below and return to normal mode
+vim.keymap.set("n", "<leader>O", "O<esc>");                                                  -- Create new line above and return to normal mode
 
 -- Windows
-vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]])                                    -- make the window biger vertically
-vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]])                                    -- make the window smaller vertically
-vim.keymap.set("n", "<M-=>", [[<cmd>horizontal resize +2<cr>]])                                  -- make the window bigger horizontally by pressing shift and =
-vim.keymap.set("n", "<M-->", [[<cmd>horizontal resize -2<cr>]])                                  -- make the window smaller horizontally by pressing shift and -
+vim.keymap.set("n", "<M-=>", [[<cmd>vertical resize +2<cr>]])                                    -- make the window biger vertically
+vim.keymap.set("n", "<M-->", [[<cmd>vertical resize -2<cr>]])                                    -- make the window smaller vertically
+vim.keymap.set("n", "<M-+>", [[<cmd>horizontal resize +2<cr>]])                              -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "<M-_>", [[<cmd>horizontal resize -2<cr>]])                              -- make the window smaller horizontally by pressing shift and -
 
 -- Navigation
 vim.keymap.set("n", "n", "nzzzv");                                                           -- Keep searched words in the center when navigating between them
 vim.keymap.set("n", "N", "Nzzzv");                                                           -- Same as above (in the opposite direction)
 
 -- Others
-vim.keymap.set("n", "<leader>ms", "<cmd> messages<CR>");                                     -- Open all vim messages history
-vim.keymap.set("n", "<leader>mtp", "<cmd> !md-to-pdf %:p %:p:h/%:t:r.pdf<cr>");
-vim.keymap.set("n", "<leader>MTP", ":!md-to-pdf %:p %:p:h/%:t:r.pdf<left><left><left><left>");
+local isColumnVisible = require("settings").isColumnVisibleDefault                           -- Line wrap column visible by default
+vim.keymap.set("n", "<leader>cc", function()
+    if not isColumnVisible then
+        vim.opt.colorcolumn = require("settings").columnwidth;                               -- A vertical line at a column width to help in keeping text length on check
+        isColumnVisible = true;
+    else
+        vim.opt.colorcolumn = "0";                                                           -- Turn off vertical line
+        isColumnVisible = false;
+    end
+end);
+
+if settings.ispandocavailable then
+    vim.keymap.set("n", "<leader>ms", "<cmd> messages<CR>");                                 -- Open all vim messages history
+    vim.keymap.set("n", "<leader>mtp", 
+        "<cmd>" .. settings.pandocmdtopdfcommand .. "<cr>");
+    vim.keymap.set("n", "<leader>MTP", 
+        ":" .. settings.pandocmdtopdfcommand .. "<left><left><left><left>");
+end
 
 -- TODO: Find a better way.... Kinda slow
 -- Netrw

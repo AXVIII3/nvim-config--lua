@@ -7,9 +7,13 @@ vim.opt.termguicolors = true;                                      -- Enable 24-
 vim.opt.splitright = true;                                         -- Open new vertical splits on the right side (more natural)
 vim.opt.scrolloff = 10;                                            -- Keep a gap of 10 lines on the top and bottom of the screen while scrolling if available
 vim.opt.signcolumn = "yes";                                        -- A column on the left side of the editor to display code symbols
+if require("settings").isColumnVisibleDefault then
+    vim.opt.colorcolumn = require("settings").columnwidth;         -- A vertical line at a column width to help in keeping text length on check
+end
 vim.opt.laststatus = 3;                                            -- One global status line for all active windows
 
 -- Utilities
+vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" };-- Completion popup style (kinda)
 vim.opt.clipboard = "unnamedplus";                                 -- Use the system clipboard buffer by default 
 vim.opt.incsearch = true;                                          -- Update seach while the search if happening
 vim.opt.wrapscan = true;                                           -- Wrap around the buffer while searching
