@@ -1,3 +1,8 @@
+--[[
+ NOTE: If you want to change any of the default settings, then rename this this to 
+       "settigns.lua" and make sure it is kept in the "lua/" directory of you nvim config
+--]]
+
 return {
 	-- Preference Specific (harmless)
 	leader = " ",                                                                          -- The neovim keymaps leader key
@@ -18,6 +23,6 @@ return {
 	-- Setup Specifix (Can break things if wrong)
 	should_setup_vimwiki = false,                                                          -- Setup Vimwiki for easier markdown note taking
 	vimwiki_directory = nil,                                                               -- Absolute path to the wiki directory
-	should_setup_pandoc_command = false,                                                   -- To setup the markdown to pdf pandoc command or not
+	should_setup_pandoc_command = false, -- NEEDS pandoc installed                         -- To setup the markdown to pdf pandoc command or not
 	undo_files_directory = vim.fn.stdpath("data") .. "undofiles",                          -- The directory where the undo tree persistent files should be stored
 }
