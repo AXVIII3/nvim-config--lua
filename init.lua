@@ -1,2 +1,1 @@
--- Initialing my sorry excuse of a nvim-config
-require("ax-nvim-config")
+require("ax_config");                                                                      -- Initialize my config
