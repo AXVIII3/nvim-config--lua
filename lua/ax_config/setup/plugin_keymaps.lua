@@ -303,10 +303,53 @@ local set_mappings = function()
 
 
 
-	-- LSP
+	-- LSP and Trouble
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = ax.augroup_name,
 		callback = function(ev)
+			nmap(
+				"T",
+				"<cmd>TroubleToggle<CR>",
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Open trouble diagnostics", true,
+												"Trouble")
+				}
+			);
+			nmap(
+				"<leader>td",
+				"<cmd>Trouble document_diagnostics<CR>",
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Open document diagnostics", true,
+												"Trouble")
+				}
+			);
+			nmap(
+				"<leader>tw",
+				"<cmd>Trouble workspace_diagnostics<CR>",
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Open workspace diagnostics", true,
+												"Trouble")
+				}
+			);
+			nmap(
+				"<leader>tq",
+				"<cmd>Trouble quickfix<CR>",
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Open quickfix list", true, "Trouble")
+				}
+			);
+			nmap(
+				"<leader>tl",
+				"<cmd>Trouble loclist<CR>",
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Open location list", true, "Trouble")
+				}
+			);
 			nmap(
 				"K",
 				vim.lsp.buf.hover,
@@ -327,10 +370,10 @@ local set_mappings = function()
 			);
 			nmap(
 				"gd",
-				vim.lsp.buf.definition,
+				"<cmd>Trouble lsp_definitions<CR>",
 				{
 					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Goto definition", true, "L.S.P.")
+					desc = ax.format_keymap_desc("Goto definition", true, "Trouble")
 				}
 			);
 			nmap(
@@ -343,7 +386,7 @@ local set_mappings = function()
 			);
 			nmap(
 				"gt",
-				vim.lsp.buf.type_definition,
+				"<cmd>Trouble lsp_type_definitions<CR>",
 				{
 					buffer = ev.buf,
 					desc = ax.format_keymap_desc("Goto type definition", true, "L.S.P.")
@@ -419,6 +462,7 @@ local set_mappings = function()
 			);
 		end
 	});
+	table.insert(ax.keymap_categories, ax.format_keymap_desc("Trouble", true));
 	table.insert(ax.keymap_categories, ax.format_keymap_desc("L.S.P.", true));
 
 

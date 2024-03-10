@@ -19,6 +19,7 @@ return {
 	should_setup_vimwiki = false,                                                          -- Setup Vimwiki for easier markdown note taking
 	vimwiki_directory = nil,                                                               -- Absolute path to the wiki directory
 	should_setup_pandoc_command = false,                                                   -- To setup the markdown to pdf pandoc command or not
-	pandoc_command = "",                                                                   -- The pandoc command in question
+	pandoc_command_quick = "",                                                             -- Immediately starts conversion
+	pandoc_command = "",                                                                   -- Waits for file name input
 	undo_files_directory = vim.fn.stdpath("data") .. "undofiles",                          -- The directory where the undo tree persistent files should be stored
 }

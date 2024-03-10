@@ -238,15 +238,21 @@ nmap(
 nmap(
 	"<leader>E",
 	function()
+		is_in_netrw = (vim.bo.filetype == "netrw");                                        -- If NetRw is open or not
+
 		if is_lex_open then                                                                -- If Netrw is open is sidebar view, close it
 			vim.cmd "Lex";                                                                 -- Netrw command to toggle in sidebar mode
 			vim.g.netrw_chgwin = -1;                                                       -- Window number where file edits takes place (Lex sets this to 2)
 			vim.g.netrw_banner = 1;                                                        -- The Netrw banner (Otherwise feels a bit empty in fullscreen)
 			is_lex_open = false;                                                           -- Lex is no longer open, remember that
+		elseif is_in_netrw then
+			vim.g.netrw_chgwin = -1;                                                       -- Lex sets this to 2 which fucks up Ex, reset to 1
+			vim.g.netrw_banner = 1;                                                        -- The Netrw banner (Otherwise feels a bit empty in fullscreen)
+			vim.cmd("Rex");                                                                -- Go back to file from where netrw was opened
 		else
 			vim.g.netrw_chgwin = -1;                                                       -- Lex sets this to 2 which fucks up Ex, reset to 1
 			vim.g.netrw_banner = 1;                                                        -- The Netrw banner (Otherwise feels a bit empty in fullscreen)
-			vim.cmd "Rex";                                                                 -- Netrw command to open normally (full-screen)
+			vim.cmd("Ex");                                                                 -- Netrw command to open normally (full-screen)
 		end
 	end,
 	{ desc = ax.format_keymap_desc("Toggle fullscreen netrw explorer or close sidebar",

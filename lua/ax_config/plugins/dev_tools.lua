@@ -42,6 +42,14 @@ return {
 		end
 	},
 
+	{
+		"folke/trouble.nvim",
+		name = "trouble",
+		dependncies = { "lspconfig" },
+		config = function()
+			require("trouble").setup({ icons = false });
+		end
+	},
 
 
 
@@ -54,7 +62,7 @@ return {
 			{ "hrsh7th/cmp-buffer", name = "cmp_buffer" },
 			{ "hrsh7th/cmp-path", name = "cmp_path" },
 			{ "L3MON4D3/LuaSnip", name = "luasnip" },
-			{ "saadparwaiz1/cmp_luasnip", name = "cmp_luasnip" }
+			{ "saadparwaiz1/cmp_luasnip", name = "cmp_luasnip" },
 		},
 		config = function()
 			local cmp = require("cmp");
