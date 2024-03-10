@@ -14,14 +14,14 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		name = "lspconfig",
-		dependencies = { "cmp", "neodev" },
+		dependencies = { "cmp", "neodev", "mason_lspconfig" },
 		config = function()
 			local lspconfig = require("lspconfig");
 			local capabilities = require("cmp_nvim_lsp").default_capabilities();
 
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
-				settings = { Lua = { diagnostics = { globals = { "vim " } } } }
+				settings = { Lua = { diagnostics = { globals = { "vim"  } } } }
 			});
 
 			lspconfig.jdtls.setup({
@@ -34,7 +34,7 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		name = "mason_lspconfig",
-		dependencies = { "mason", "lspconfig" },
+		dependencies = "mason",
 		config = function()
 			require("mason-lspconfig").setup({
 				automatic_installation = true
@@ -66,7 +66,7 @@ return {
 					end
 				},
 
-				sources = cmp.config.sources({
+					sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 				}, {

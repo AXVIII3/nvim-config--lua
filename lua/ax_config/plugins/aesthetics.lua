@@ -57,7 +57,13 @@ return {
 		name = "dressing",
 		dependencies = "telescope",
 		config = function()
-			require("dressing").setup();
+			require("dressing").setup({
+				select = {
+					telescope = {
+						initial_mode = "normal"
+					}
+				}
+			});
 		end
 	},
 
@@ -162,14 +168,20 @@ return {
 							key = "r"
 						},
 						{
+							action = "KeymapSearch",
+							desc = " Keymaps" .. (" "):rep(32),
+							icon = "⌨️ ",
+							key = "m"
+						},
+						{
 							action = "lua vim.cmd(\"Ex \" .. vim.fn.stdpath(\"config\"))",
 							desc = " Open Config" .. (" "):rep(28),
 							icon = " ",
 							key = "c"
 						},
 						{
-							action = "Lazy",
 							desc = " Lazy" .. (" "):rep(35),
+							action = "Lazy",
 							icon = "💤",
 							key = "l"
 						},

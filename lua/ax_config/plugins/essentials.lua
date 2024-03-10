@@ -16,7 +16,11 @@ return {
 		branch = "harpoon2",                                                               -- New harpoon version (remade)
 		dependencies = "plenary",
 		config = function()
-			require("harpoon").setup();
+			require("harpoon").setup({
+				settings = {
+					save_on_toggle = true
+				}
+			});
 		end
 	},
 

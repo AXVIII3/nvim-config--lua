@@ -59,7 +59,7 @@ return {
 		name = "color_picker",
 		config = function()
 			require("color-picker").setup({
-				["border"] = "none",
+				["border"] = "solid",
 				["background_highlight_group"] = "PMenu"
 			});
 		end

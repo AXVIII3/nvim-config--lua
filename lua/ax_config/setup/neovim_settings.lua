@@ -5,14 +5,13 @@ vim.opt.wrap = false;                                                           
 vim.opt.textwidth = 0;                                                                     -- Number of lines that can be displayed before wrapping (0 for infinite)
 vim.opt.termguicolors = true;                                                              -- Enable 24-bit colors (basically better colors)
 vim.opt.splitright = true;                                                                 -- Open new vertical splits on the right side (more natural)
-vim.opt.scrolloff = 8;                                                                     -- Keep a gap of 10 lines on the top and bottom of the screen while scrolling if available
+vim.opt.scrolloff = 4;                                                                     -- Keep a gap of 10 lines on the top and bottom of the screen while scrolling if available
 vim.opt.signcolumn = "yes";                                                                -- A column on the left side of the editor to display code symbols
 if ax.should_column_be_visible_by_default then
 	vim.opt.colorcolumn = ax.column_width;                                                 -- A vertical line at a column width to help in keeping text length on check
 vim.cmd('autocmd FileType netrw setlocal colorcolumn&');                                   -- Turn off coloured column in netrw
 vim.cmd('autocmd FileType help setlocal colorcolumn&');                                    -- Turn off coloured column in help pages
 end
-  
 vim.opt.laststatus = 3;                                                                    -- One global status line for all active windows
 
 -- Utilities
@@ -52,4 +51,4 @@ vim.opt.swapfile = false                                                        
 vim.opt.backup = false                                                                     -- Dont create backups of files
 vim.opt.writebackup = false                                                                -- Dont create a backup of the file before overriing it
 vim.opt.undofile = true                                                                    -- Store all undos in a buffer to a file persistently
-vim.opt.undodir = ax.undo_files_dir;                                                       -- Sets the directory to store undofile in
+vim.opt.undodir = ax.undo_files_directory;                                                 -- Sets the directory to store undofile in
