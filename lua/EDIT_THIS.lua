@@ -27,6 +27,5 @@ return {
 	pandoc_command_quick = "",                                                             -- Immediately starts conversion
 	pandoc_command = "",                                                                   -- Waits for file name input
 	should_setup_java = false,                                                             -- To set up java development with jdtls or not
-	java_21_runtime_path = "",                                                             -- JDK binary location for Java 21 (latest as of 21.04.24)
 	undo_files_directory = vim.fn.stdpath("data") .. "undofiles",                          -- The directory where the undo tree persistent files should be stored
 }
