@@ -57,6 +57,8 @@ return {
 					}
 				}
 			});
+
+			vim.cmd("CloakEnable");
 		end
 	}
 }

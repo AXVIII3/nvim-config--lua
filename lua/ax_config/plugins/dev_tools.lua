@@ -1,5 +1,6 @@
 -- Plugins for actual development stuff like LSP, Completions and Debugging
 
+local is_jdtls_setup = false;
 return {
 	-- Installs LSPs, DAPs, Formatters, etc
 	{
@@ -23,10 +24,6 @@ return {
 				capabilities = capabilities,
 				settings = { Lua = { diagnostics = { globals = { "vim"  } } } }
 			});
-
-			lspconfig.jdtls.setup({
-				capabilities = capabilities
-			});
 		end
 	},
 
@@ -42,6 +39,38 @@ return {
 		end
 	},
 
+	-- Configuration for JAVA language server (jdtls)
+	{
+		"mfussenegger/nvim-jdtls",
+		name = "jdtls",
+		dependencies = "lspconfig",
+		config = function()
+			if not ax.should_setup_java or is_jdtls_setup then
+				return
+			end
+
+			-- Setup taken from https://github.com/mfussenegger/nvim-jdtls
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "*.java",
+				callback = function()
+					print("Wait a sec. Initializing JDTLS");
+					require("jdtls").start_or_attach({
+						cmd = { vim.fn.stdpath("data") .. "\\mason\\bin\\jdtls"..
+								(vim.fn.has("windows") == 1 and ".cmd" or "") },
+						root_dir = vim.fs.dirname(
+										vim.fs.find(
+											{'gradlew', '.git', 'mvnw'},
+											{ upward = true }
+										)[1]
+									),
+					});
+
+					is_jdtls_setup = true;
+				end
+			});
+		end
+	},
+
 	{
 		"folke/trouble.nvim",
 		name = "trouble",
@@ -50,6 +79,9 @@ return {
 			require("trouble").setup({ icons = false });
 		end
 	},
+
+
+
 
 
 
@@ -95,6 +127,8 @@ return {
 			});
 		end
 	},
+
+
 
 
 

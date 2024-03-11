@@ -116,25 +116,25 @@ table.insert(ax.keymap_categories, ax.format_keymap_desc("Text Editing", false))
 
 -- Windows
 nmap(
-	"=",
+	"+",
 	[[<cmd>vertical resize +2<cr>]],
 	{ desc = ax.format_keymap_desc("Increase window size vertically", false,
 									"Window Resizing") }
 );                                                                                         -- Make the window biger vertically
 nmap(
-	"-",
+	"_",
 	[[<cmd>vertical resize -2<cr>]],
 	{ desc = ax.format_keymap_desc("Decrease window size vertically", false,
 									"Window Resizing") }
 );                                                                                         -- Make the window smaller vertically
 nmap(
-	"+",
+	"<M+=>",
 	[[<cmd>horizontal resize +2<cr>]],
 	{ desc = ax.format_keymap_desc("Increase window size horizontally", false,
 									"Window Resizing") }
 );                                                                                         -- Make the window bigger horizontally
 nmap(
-	"_",
+	"<M+->",
 	[[<cmd>horizontal resize -2<cr>]],
 	{ desc = ax.format_keymap_desc("Decrease window size horizontally", false,
 									"Window Resizing") }
@@ -188,7 +188,16 @@ if ax.should_setup_pandoc_command then
 	);                                                                                     -- Quickly convert markdown to pdf
 	nmap(
 		"<leader>MTP",
-		"<cmd>" .. ax.pandoc_command,
+		function()
+		vim.ui.input(
+			{ prompt = "Enter pdf file name: " },
+			function(input)
+				if not (input == nil) then
+					vim.cmd(ax.pandoc_command:gsub("{name}", input));
+				end
+			end
+		);
+		end,
 		{ desc = ax.format_keymap_desc("Convert md to pdf using pandoc", false,
 										"Others") }
 	);                                                                                     -- Convert markdown to pdf and lemme choose a file name for it

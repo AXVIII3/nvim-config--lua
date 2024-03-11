@@ -316,10 +316,12 @@ local set_mappings = function()
 
 
 
-	-- LSP and Trouble
+	-- LSP, Trouble and JDTLS
+	local jdtls = require("jdtls");
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = ax.augroup_name,
 		callback = function(ev)
+			-- Trouble
 			nmap(
 				"T",
 				"<cmd>TroubleToggle<CR>",
@@ -364,6 +366,16 @@ local set_mappings = function()
 				}
 			);
 			nmap(
+				"gd",
+				"<cmd>Trouble lsp_definitions<CR>",
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Goto definition", true, "Trouble")
+				}
+			);
+
+			-- General LSP
+			nmap(
 				"K",
 				vim.lsp.buf.hover,
 				{
@@ -379,14 +391,6 @@ local set_mappings = function()
 					buffer = ev.buf,
 					desc = ax.format_keymap_desc("Show signature information", true,
 												"L.S.P.")
-				}
-			);
-			nmap(
-				"gd",
-				"<cmd>Trouble lsp_definitions<CR>",
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Goto definition", true, "Trouble")
 				}
 			);
 			nmap(
@@ -473,10 +477,45 @@ local set_mappings = function()
 					desc = ax.format_keymap_desc("Format file", true, "L.S.P.")
 				}
 			);
+
+			-- JDTLS Specific
+			nmap(
+				"<leader>jo",
+				function() jdtls.organize_imports() end,
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Organise Imports", true, "J.D.T.L.S.")
+				}
+			);
+			nmap(
+				"<leader>jev",
+				function() jdtls.extract_variable() end,
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Extract variable", true, "J.D.T.L.S.")
+				}
+			);
+			nmap(
+				"<leader>jec",
+				function() jdtls.extract_constant() end,
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Extract constant", true, "J.D.T.L.S.")
+				}
+			);
+			nmap(
+				"<leader>jem",
+				function() jdtls.extract_method({ true }) end,
+				{
+					buffer = ev.buf,
+					desc = ax.format_keymap_desc("Extract method", true, "J.D.T.L.S.")
+				}
+			);
 		end
 	});
 	table.insert(ax.keymap_categories, ax.format_keymap_desc("Trouble", true));
 	table.insert(ax.keymap_categories, ax.format_keymap_desc("L.S.P.", true));
+	table.insert(ax.keymap_categories, ax.format_keymap_desc("J.D.T.L.S.", true));
 
 
 
