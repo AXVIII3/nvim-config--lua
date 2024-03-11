@@ -1,6 +1,19 @@
 local is_undotree_open = false;
 
 local set_mappings = function()
+	-- Dashboard
+	nmap(
+		"<leader>db",
+		"<cmd>Dashboard<CR>",
+		{ desc = ax.format_keymap_desc("Open the dashboard", true, "Dashboard")}
+	);
+	table.insert(ax.keymap_categories, ax.format_keymap_desc("Dashboard", true));
+
+
+
+
+
+
 	-- Harpoon
 	local harpoon = require("harpoon");
 	nmap(

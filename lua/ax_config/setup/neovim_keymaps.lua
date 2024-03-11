@@ -32,7 +32,7 @@ table.insert(ax.keymap_categories, ax.format_keymap_desc("File", false));
 -- Text Editing
 nmap(
 	"<leader>ch",
-	"/ClEaR_hIgHlIgHtS<CR>",
+	function() ax.clear_highlights() end,
 	{ desc = ax.format_keymap_desc("Clear highlights", false, "Text Editing") }
 );                                                                                         -- Search for a random string so that the highlighting goes away
 nmap(
@@ -173,18 +173,9 @@ nmap(
 									"Others") }
 );                                                                                         -- Open all vim messages history
 
-local is_column_visible = ax.should_column_be_visible_by_default;                          -- Line wrap column visible by default or not
 nmap(
 	"<leader>cc",
-	function()
-		if not is_column_visible then
-			vim.opt.colorcolumn = ax.column_width;                                         -- A vertical line at a column width to help in keeping text length on check
-			is_column_visible = true;
-		else
-			vim.opt.colorcolumn = "0";                                                     -- Turn off vertical line
-			is_column_visible = false;
-		end
-	end,
+	function() ax.toggle_color_column() end,
 	{ desc = ax.format_keymap_desc("Toggle color column", false, "Others") }
 );
 
@@ -198,9 +189,16 @@ if ax.should_setup_pandoc_command then
 	nmap(
 		"<leader>MTP",
 		"<cmd>" .. ax.pandoc_command,
-		{ desc = ax.format_keymap_desc("Convert md to pdf using pandoc", false, "Others") }
+		{ desc = ax.format_keymap_desc("Convert md to pdf using pandoc", false,
+										"Others") }
 	);                                                                                     -- Convert markdown to pdf and lemme choose a file name for it
 end
+
+nmap(
+	"<leader>in",
+	function() ax.change_indent_style() end,
+	{ desc = ax.format_keymap_desc("Change indent style", false, "Others") }
+);
 
 table.insert(ax.keymap_categories, ax.format_keymap_desc("Others", false));
 
