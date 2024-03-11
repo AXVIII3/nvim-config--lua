@@ -45,7 +45,7 @@ return {
 	{
 		"folke/trouble.nvim",
 		name = "trouble",
-		dependncies = { "lspconfig" },
+		dependencies = "lspconfig",
 		config = function()
 			require("trouble").setup({ icons = false });
 		end
@@ -88,6 +88,7 @@ return {
 	{
 		"folke/neodev.nvim",
 		name = "neodev",
+		dependencies = "cmp",
 		config = function()
 			require("neodev").setup({
 				-- TODO: Add the dapui thing
@@ -108,7 +109,7 @@ return {
 	{
 		"rcarriga/nvim-dap-ui",
 		name = "dap_ui",
-		dependncies = "dap",
+		dependencies = "dap",
 		config = function()
 			local dap = require("dap");
 			local dapui = require("dapui");
