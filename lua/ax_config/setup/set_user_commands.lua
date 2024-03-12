@@ -27,10 +27,17 @@ vim.api.nvim_create_user_command(
 );
 
 if ax.should_setup_java then
-	-- User commanf to compile the current JAVA file
+	-- User commanf to compile the current JAVA file and run it
 	vim.api.nvim_create_user_command(
-		"JavaCompileCurrentFile",
-		function() vim.cmd("!javac %:p:h/%:t"); end,
+		"JavaCompileAndRunCurrentFile",
+		function()
+			local dir_path = vim.fn.expand("%:p:h");
+			local file_name = vim.fn.expand("%:t");
+			local class_name = vim.fn.expand("%:t:r");
+			vim.cmd("terminal");
+			ax.feedkeys("icd " .. dir_path .. "<CR>javac " .. file_name .. "<CR>" ..
+						"java " .. class_name .. "<CR>", "n");
+		end,
 		{}
 	);
 end
