@@ -25,3 +25,12 @@ vim.api.nvim_create_user_command(
 	function() ax.toggle_color_column() end,
 	{}
 );
+
+if ax.should_setup_java then
+	-- User commanf to compile the current JAVA file and run it
+	vim.api.nvim_create_user_command(
+		"JavaCompileAndRunCurrentFile",
+		function() vim.cmd("!javac %:p:h/%t; java %:p:h/%t%r") end,
+		{}
+	);
+end
