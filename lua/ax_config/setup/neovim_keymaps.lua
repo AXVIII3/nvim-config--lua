@@ -128,13 +128,13 @@ nmap(
 									"Window Resizing") }
 );                                                                                         -- Make the window smaller vertically
 nmap(
-	"<M+=>",
+	"<M-=>",
 	[[<cmd>horizontal resize +2<cr>]],
 	{ desc = ax.format_keymap_desc("Increase window size horizontally", false,
 									"Window Resizing") }
 );                                                                                         -- Make the window bigger horizontally
 nmap(
-	"<M+->",
+	"<M-->",
 	[[<cmd>horizontal resize -2<cr>]],
 	{ desc = ax.format_keymap_desc("Decrease window size horizontally", false,
 									"Window Resizing") }
@@ -266,3 +266,114 @@ nmap(
 									false, "NetRw") }
 );
 table.insert(ax.keymap_categories, ax.format_keymap_desc("NetRw", false));
+
+
+-- LSP
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = ax.augroup_name,
+	callback = function(ev)
+		nmap(
+			"K",
+			vim.lsp.buf.hover,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Display hover information", false,
+											"L.S.P.")
+			}
+		);
+		nmap(
+			"<leader>k",
+			vim.lsp.buf.signature_help,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Show signature information", false,
+											"L.S.P.")
+			}
+		);
+		nmap(
+			"gD",
+			vim.lsp.buf.declaration,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Goto declaration", false, "L.S.P.")
+			}
+		);
+		nmap(
+			"gt",
+			"<cmd>Trouble lsp_type_definitions<CR>",
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Goto type definition", false, "L.S.P.")
+			}
+		);
+		nmap(
+			"gi",
+			vim.lsp.buf.implementation,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Goto implementation", false, "L.S.P.")
+			}
+		);
+		nmap(
+			"gr",
+			"<cmd>Telescope lsp_references<CR>",
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("List references in telescope UI",
+											false, "L.S.P.")
+			}
+		);
+		nmap(
+			"]d",
+			vim.diagnostic.goto_next,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Goto next diagnostic", false, "L.S.P.")
+			}
+		);
+		nmap(
+			"[d",
+			vim.diagnostic.goto_prev,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Goto previous diagnostic", false,
+											"L.S.P.")
+			}
+		);
+		nmap(
+			"<leader>ca",
+			vim.lsp.buf.code_action,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("List code actions", false, "L.S.P.")
+			}
+		);
+		nmap(
+			"<F2>",
+			vim.lsp.buf.rename,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Rename symbol under cursor", false,
+											"L.S.P.")
+			}
+		);
+		nmap(
+			"<leader>rn",
+			vim.lsp.buf.rename,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Rename symbol under cursor", false,
+											"L.S.P.")
+			}
+		);
+		nmap(
+			"<leader>F",
+			function() vim.lsp.buf.format({ async = true }) end,
+			{
+				buffer = ev.buf,
+				desc = ax.format_keymap_desc("Format file", false, "L.S.P.")
+			}
+		);
+	end
+});
+table.insert(ax.keymap_categories, ax.format_keymap_desc("L.S.P.", false));

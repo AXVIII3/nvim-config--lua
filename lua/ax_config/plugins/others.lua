@@ -1,6 +1,9 @@
 -- Plugins with more niche or unique functions than normal neovim usage
 
 return {
+	-- Games to become better at vim
+	"ThePrimeagen/vim-be-good",
+
 	-- Easier navigation through my notes wiki
 	{
 		"vimwiki/vimwiki",

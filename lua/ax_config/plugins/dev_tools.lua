@@ -1,6 +1,7 @@
 -- Plugins for actual development stuff like LSP, Completions and Debugging
 
 local is_jdtls_setup = false;
+
 return {
 	-- Installs LSPs, DAPs, Formatters, etc
 	{
@@ -43,16 +44,47 @@ return {
 	{
 		"mfussenegger/nvim-jdtls",
 		name = "jdtls",
-		dependencies = "lspconfig",
+		dependencies = { "lspconfig", "dap" },
 		config = function()
-			if not ax.should_setup_java or is_jdtls_setup then
+			if (not ax.should_setup_java) then
 				return
 			end
 
 			-- Setup taken from https://github.com/mfussenegger/nvim-jdtls
+
+			-- The java-debug-adapter stuff
+			-- https://github.com/microsoft/java-debug
+			local bundles = {
+				vim.fn.glob(
+					-- Installed by mason
+					vim.fn.stdpath("data") ..
+					"/mason/packages/java-debug-adapter/extension/server/" ..
+					"com.microsoft.java.debug.plugin-*.jar",
+					true
+				)
+			}
+
+			-- The java-test stuff
+			-- https://github.com/microsoft/vscode-java-test
+			vim.list_extend(
+				bundles,
+				vim.split(
+					vim.fn.glob(
+						-- Installed by mason
+						vim.fn.stdpath("data") ..
+						"/mason/packages/java-test/extension/server/*.jar",
+						true
+					), "\n"
+				)
+			);
+
 			vim.api.nvim_create_autocmd("BufEnter", {
 				pattern = "*.java",
 				callback = function()
+					if is_jdtls_setup then
+						return
+					end
+
 					print("Wait a sec. Initializing JDTLS");
 					require("jdtls").start_or_attach({
 						cmd = { vim.fn.stdpath("data") .. "\\mason\\bin\\jdtls"..
@@ -63,6 +95,9 @@ return {
 											{ upward = true }
 										)[1]
 									),
+						init_options = {
+							bundles = bundles
+						}
 					});
 
 					is_jdtls_setup = true;
@@ -137,6 +172,15 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		name = "dap",
+		dependencies = {
+			-- List of debuggers
+		},
+		config = function()
+			-- DAP Setups can be found at
+			-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+
+			local dap = require("dap");
+		end
 	},
 
 	-- The debugger UI
@@ -164,6 +208,7 @@ return {
 		"theHamsta/nvim-dap-virtual-text",
 		name = "dap_virtual_text",
 		config = function()
+			---@diagnostic disable-next-line: missing-parameter
 			require("nvim-dap-virtual-text").setup();
 		end
 	}

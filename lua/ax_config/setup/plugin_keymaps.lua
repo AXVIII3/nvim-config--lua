@@ -84,7 +84,7 @@ local set_mappings = function()
 	);
 	nmap(
 		"<leader>fr",
-		function() telescope.old_files() end,
+		function() telescope.oldfiles() end,
 		{ desc = ax.format_keymap_desc("Fuzzy find recent files", true, "Telescope") }
 	);
 	nmap(
@@ -316,7 +316,7 @@ local set_mappings = function()
 
 
 
-	-- LSP, Trouble and JDTLS
+	-- Trouble and JDTLS
 	local jdtls = require("jdtls");
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = ax.augroup_name,
@@ -374,110 +374,6 @@ local set_mappings = function()
 				}
 			);
 
-			-- General LSP
-			nmap(
-				"K",
-				vim.lsp.buf.hover,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Display hover information", true,
-												"L.S.P.")
-				}
-			);
-			nmap(
-				"<leader>k",
-				vim.lsp.buf.signature_help,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Show signature information", true,
-												"L.S.P.")
-				}
-			);
-			nmap(
-				"gD",
-				vim.lsp.buf.declaration,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Goto declaration", true, "L.S.P.")
-				}
-			);
-			nmap(
-				"gt",
-				"<cmd>Trouble lsp_type_definitions<CR>",
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Goto type definition", true, "L.S.P.")
-				}
-			);
-			nmap(
-				"gi",
-				vim.lsp.buf.implementation,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Goto implementation", true, "L.S.P.")
-				}
-			);
-			nmap(
-				"gr",
-				"<cmd>Telescope lsp_references<CR>",
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("List references in telescope UI",
-												true, "L.S.P.")
-				}
-			);
-			nmap(
-				"]d",
-				vim.diagnostic.goto_next,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Goto next diagnostic", true, "L.S.P.")
-				}
-			);
-			nmap(
-				"[d",
-				vim.diagnostic.goto_prev,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Goto previous diagnostic", true,
-												"L.S.P.")
-				}
-			);
-			nmap(
-				"<leader>ca",
-				vim.lsp.buf.code_action,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("List code actions", true, "L.S.P.")
-				}
-			);
-			nmap(
-				"<F2>",
-				vim.lsp.buf.rename,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Rename symbol under cursor", true,
-												"L.S.P.")
-				}
-			);
-			nmap(
-				"<leader>rn",
-				vim.lsp.buf.rename,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Rename symbol under cursor", true,
-												"L.S.P.")
-				}
-			);
-			nmap(
-				"<leader>F",
-				function() vim.lsp.buf.format({ async = true }) end,
-				{
-					buffer = ev.buf,
-					desc = ax.format_keymap_desc("Format file", true, "L.S.P.")
-				}
-			);
-
 			-- JDTLS Specific
 			nmap(
 				"<leader>jo",
@@ -514,7 +410,6 @@ local set_mappings = function()
 		end
 	});
 	table.insert(ax.keymap_categories, ax.format_keymap_desc("Trouble", true));
-	table.insert(ax.keymap_categories, ax.format_keymap_desc("L.S.P.", true));
 	table.insert(ax.keymap_categories, ax.format_keymap_desc("J.D.T.L.S.", true));
 
 
@@ -616,6 +511,93 @@ local set_mappings = function()
 		{ desc = ax.format_keymap_desc("Abort completion", true, "Completion") }
 	);
 	table.insert(ax.keymap_categories, ax.format_keymap_desc("Completion", true));
+
+
+
+
+
+
+	-- DAP and debugging
+	local dap = require("dap");
+	dap.listeners.before.attach[ax.augroup_name] = function()
+		print("Yay Dap Works!")
+		nmap(
+			"<F3>",
+			function() dap.toggle_breakpoint() end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Toggle breakpoint", true, "D.A.P.")
+			}
+		);
+		nmap(
+			"<F4>",
+			function() dap.set_breakpoint(vim.fn.input("Condition: ")) end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Set conditional breakpoint", true, "D.A.P.")
+			}
+		);
+		nmap(
+			"<F5>",
+			function() dap.set_breakpoint(nil, nil, vim.fn.input("Message: ")) end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Set log-point", true, "D.A.P.")
+			}
+		);
+		nmap(
+			"<F6>",
+			function() dap.continue() end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Continue progression", true, "D.A.P.")
+			}
+		);
+		nmap(
+			"<F7>",
+			function() dap.step_over() end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Step over", true, "D.A.P.")
+			}
+		);
+		nmap(
+			"<F8>",
+			function() dap.step_into() end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Step into", true, "D.A.P.")
+			}
+		);
+		nmap(
+			"<F9>",
+			function() dap.step_out() end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Step out", true, "D.A.P.")
+			}
+		);
+		nmap(
+			"<F10>",
+			function() dap.repl.open() end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Open Repl", true, "D.A.P.")
+			}
+		);
+	end
+	dap.listeners.before.attach.dapui_config = function()
+		nmap(
+			"<leader>du",
+			function() require("dapui").toggle() end,
+			{
+				buffer = 0,
+				desc = ax.format_keymap_desc("Open DAP UI", true, "D.A.P. U.I.")
+			}
+		);
+	end
+	table.insert(ax.keymap_categories, ax.format_keymap_desc("D.A.P.", true));
+	table.insert(ax.keymap_categories, ax.format_keymap_desc("D.A.P. U.I.", true));
 end
 
 vim.api.nvim_create_autocmd("VimEnter", {

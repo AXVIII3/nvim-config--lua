@@ -1,5 +1,8 @@
+-- Global list where plugins or keymap categories can list their names which help in
+-- keymap searching
 _G.ax.keymap_categories = {};
 
+-- Function which simulates the keypresses provided as parameter
 _G.ax.feedkeys = function(keys, mode)
 	vim.api.nvim_feedkeys(
 		vim.api.nvim_replace_termcodes(keys, true, true, true),
@@ -8,10 +11,14 @@ _G.ax.feedkeys = function(keys, mode)
 	);
 end
 
+-- Function to clear highlights from searching, substitution, etc
+-- Not using :nohl as it disables highlights for future searches
 _G.ax.clear_highlights = function()
 	ax.feedkeys("<ESC>:silent! /cLeAr_hIgHlIgHtS<CR>", "n");
 end
 
+-- Function to format the keymap description with a category flag and plugin/category name
+-- Useful for fuzzy finding keymaps by category or plugin
 _G.ax.format_keymap_desc = function(desc, is_plugin, name)
 	local number_of_spaces = (name == nil and 154 or 104) - #desc - (name == nil and 0 or
 							#name) - (is_plugin and 16 or 17);
@@ -21,9 +28,10 @@ _G.ax.format_keymap_desc = function(desc, is_plugin, name)
 	return desc .. (" "):rep(number_of_spaces) .. postfix;
 end
 
+-- Utility function to search for keymaps incase I forgor☠️
 _G.ax.list_keymaps = function()
 	local choices = {
-		"All keymaps", "All custom general plugins", "All custom plugin keymaps"
+		"All keymaps", "All custom general keymaps", "All custom plugin keymaps"
 	};
 	for _, value in ipairs(ax.keymap_categories) do
 		table.insert(choices, value);

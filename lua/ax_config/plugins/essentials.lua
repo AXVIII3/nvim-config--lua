@@ -16,6 +16,7 @@ return {
 		branch = "harpoon2",                                                               -- New harpoon version (remade)
 		dependencies = "plenary",
 		config = function()
+			---@diagnostic disable-next-line: missing-fields, missing-parameter
 			require("harpoon").setup({
 				settings = {
 					save_on_toggle = true
@@ -32,6 +33,7 @@ return {
 		tag = "0.1.5",                                                                     -- Latest tag as of 09.03.24 (no setting this can break stuff)
 		dependencies = "plenary",
 		config = function()
+			---@diagnostic disable-next-line: missing-parameter
 			require("telescope").setup();
 		end
 	},
@@ -44,6 +46,7 @@ return {
 		build = ":TSUpdate",                                                               -- Auto update all parsers when TS is installed or updated
 		config = function()
 			require("nvim-treesitter.install").prefer_git = true;                          -- Sometimes things break, this fixes it sometimes by using git instead of curl
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				sync_install = false,
 				auto_install = true,
