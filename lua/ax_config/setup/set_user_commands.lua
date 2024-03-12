@@ -27,10 +27,10 @@ vim.api.nvim_create_user_command(
 );
 
 if ax.should_setup_java then
-	-- User commanf to compile the current JAVA file and run it
+	-- User commanf to compile the current JAVA file
 	vim.api.nvim_create_user_command(
-		"JavaCompileAndRunCurrentFile",
-		function() vim.cmd("!javac %:p:h/%t; java %:p:h/%t%r") end,
+		"JavaCompileCurrentFile",
+		function() vim.cmd("!javac %:p:h/%:t"); end,
 		{}
 	);
 end
