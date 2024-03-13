@@ -4,7 +4,8 @@ return {
 	-- Tree visualisation of undo history
 	{
 		"mbbill/undotree",
-		name = "undotree"
+		name = "undotree",
+		cmd = { "UndotreeToggle", "UndotreeFocus" }
 	},
 
 
@@ -12,6 +13,7 @@ return {
 		"folke/todo-comments.nvim",
 		name = "todo_comments",
 		dependencies = { "plenary" },
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			require("todo-comments").setup();
 		end
@@ -33,6 +35,7 @@ return {
 		"numToStr/Comment.nvim",
 		name = "comment",
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("Comment").setup({
 				mappings = {
 					basic = false,

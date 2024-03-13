@@ -37,6 +37,7 @@ return {
 		"navarasu/onedark.nvim",
 		name = "onedark",
 		priority = 1000,                                                                   -- Highest priority in my config
+		lazy = false,
 		config = function()
 			local onedark = require("onedark");
 
@@ -56,13 +57,22 @@ return {
 		"stevearc/dressing.nvim",
 		name = "dressing",
 		dependencies = "telescope",
+		lazy = true,
+		init = function()
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing" } })
+				return vim.ui.select(...)
+			end
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing" } })
+				return vim.ui.input(...)
+			end
+		end,
 		config = function()
 			require("dressing").setup({
-				select = {
-					telescope = {
-						initial_mode = "normal"
-					}
-				}
+				select = { telescope = { initial_mode = "normal" } }
 			});
 		end
 	},
@@ -82,6 +92,7 @@ return {
 						"right_sep", function()
 							return {
 								"StalineFill",
+								---@diagnostic disable-next-line: undefined-field
 								(vim.opt.expandtab._value and " Spaces" or " Tab" .. ": "
 								.. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " ")
 							}
@@ -134,6 +145,7 @@ return {
 	{
 		"nvimdev/dashboard-nvim",
 		name = "dashboard",
+		event = "VimEnter",
 		config = function()
 			vim.api.nvim_set_hl(0, "DashboardHeader", { fg="#97ca72" });
 

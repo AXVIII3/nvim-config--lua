@@ -1,3 +1,13 @@
+-- Global function to map key in given mode
+_G.map = function(mode, key, action, opt)
+	vim.keymap.set(mode, key, action, opt);
+end
+
+-- Global function to map keys in normal mode
+_G.nmap = function(key, action, opt)
+	vim.keymap.set("n", key, action, opt);
+end
+
 -- Global list where plugins or keymap categories can list their names which help in
 -- keymap searching
 _G.ax.keymap_categories = {};
@@ -88,7 +98,8 @@ _G.ax.change_indent_style = function()
 						end
 						ax.feedkeys(":retab<CR>", "n");
 						if ch == "Tabs" then
-							ax.feedkeys(":%s/\\(^\\s*\\)\\@<=" .. (" "):rep(old_indent_width) .. "/\t/g<CR>", "n");
+							ax.feedkeys(":%s/\\(^\\s*\\)\\@<=" ..
+							(" "):rep(old_indent_width) .. "/\t/g<CR>", "n");
 							ax.clear_highlights();
 						end
 					end

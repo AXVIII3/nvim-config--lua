@@ -2,7 +2,10 @@
 
 return {
 	-- Games to become better at vim
-	"ThePrimeagen/vim-be-good",
+	{
+		"ThePrimeagen/vim-be-good",
+		cmd = "VimBeGood"
+	},
 
 	-- Easier navigation through my notes wiki
 	{
@@ -29,7 +32,8 @@ return {
 				vim.g.vimwiki_markdown_link_ext = 1;
 				vim.g.taskwiki_markdown_syntax = "markdown";
 			end
-		end
+		end,
+		cmd = { "VimwikiIndex", "VimwikiUISelect" }
 	},
 
 	-- To preview markdown files while editing in realtime
@@ -39,7 +43,8 @@ return {
 		build = function() vim.fn["mkdp#util#install"]() end,
 		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
-		end
+		end,
+		ft = { "markdown", "md" }
 	},
 
 	-- Hides important variables like secrets and tokens

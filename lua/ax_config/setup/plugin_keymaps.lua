@@ -417,100 +417,55 @@ local set_mappings = function()
 
 
 
--- Completion
-	local cmp = require("cmp");
-	local luasnip = require("luasnip");
-	map(
-		{ "i", "s" },
-		"<C-n>",
-		cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select });
-			elseif luasnip.expand_or_locally_jumpable() then
-				luasnip.expand_or_jump()
-			elseif ax.has_words_before() then
-				cmp.complete()
-				if #cmp.get_entries() == 1 then
-					cmp.confirm({ select = true });
-				end
-			elseif not fallback == nil then
-				fallback()
-			end
-		end).i,
-		{ desc = ax.format_keymap_desc("Goto next suggestion in completion list", true,
-										"Completion") }
-	);
-	map(
-		{ "i", "s" },
-		"<C-p>",
-		cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item();
-			elseif luasnip.locally_jumpable(-1) then
-				luasnip.jump(-1)
-			elseif not fallback == nil then
-				fallback()
-			end
-		end).i,
-		{ desc = ax.format_keymap_desc("Goto previous suggestion in completion list",
-										true, "Completion") }
-	);
-	map(
-		{ "i", "s" },
-		"<C-u>",
-		function() cmp.mapping.scroll_docs(-3); end,
-		{ desc = ax.format_keymap_desc("Half scroll upwards in documentation popup", true,
-										"Completion") }
-	);
-	map(
-		{ "i", "s" },
-		"<C-d>",
-		function() cmp.mapping.scroll_docs(3); end,
-		{ desc = ax.format_keymap_desc("Half scroll downwards in documentation popup",
-										true, "Completion") }
-	);
-	map(
-		{ "i", "s" },
-		"<C-b>",
-		function() cmp.mapping.scroll_docs(-6); end,
-		{ desc = ax.format_keymap_desc("Full scroll upwards in documentation popup", true,
-										"Completion") }
-	);
-	map(
-		{ "i", "s" },
-		"<C-f>",
-		function() cmp.mapping.scroll_docs(6); end,
-		{ desc = ax.format_keymap_desc("Full scroll downwards in documentation popup",
-										true, "Completion") }
-	);
-	map(
-		"i",
-		"<C-s>",
-		cmp.mapping(function(fallback)
-			if cmp.visible() and cmp.get_active_entry() then
-				cmp.confirm({ select = false });
-			elseif not fallback == nil then
-				fallback()
-			end
-		end).i,
-		{ desc = ax.format_keymap_desc("Choose the completion suggestion (insert mode)",
-										true, "Completion") }
-	);
-	map(
-		"s",
-		"<C-s>",
-		function() cmp.mapping.confirm({ select = true }); end,
-		{ desc = ax.format_keymap_desc(
-				"Choose the completion suggestion (substitute mode)", true, "Completion"
-		)}
-	);
-	map(
-		{ "i", "s" },
-		"<C-x>",
-		function() cmp.mapping.abort(); end,
-		{ desc = ax.format_keymap_desc("Abort completion", true, "Completion") }
-	);
-	table.insert(ax.keymap_categories, ax.format_keymap_desc("Completion", true));
+-- -- Completion
+--	local insert_mode_mappings = vim.api.nvim_get_keymap("i");
+--	for _, map in pairs(insert_mode_mappings) do
+--		if map.lhs == "<Tab>" then
+--			print(map.desc)
+--	end
+
+-- mapping = {
+-- 	["<Tab>"] = cmp.mapping(function(fallback)
+-- 			if cmp.visible() then
+-- 				cmp.select_next_item({
+-- 					behavior = cmp.SelectBehavior.Select
+-- 				});
+-- 			elseif luasnip.expand_or_locally_jumpable() then
+-- 				luasnip.expand_or_jump()
+-- 			elseif ax.has_words_before() then
+-- 				cmp.complete()
+-- 			else
+-- 				fallback()
+-- 			end
+-- 	end, { "i", "s" }),
+-- 	["<S-Tab>"] = cmp.mapping(function(fallback)
+-- 			if cmp.visible() then
+-- 				cmp.select_prev_item();
+-- 			elseif luasnip.locally_jumpable(-1) then
+-- 				luasnip.jump(-1)
+-- 			else
+-- 				fallback()
+-- 			end
+-- 	end, { "i", "s" }),
+-- 	["<CR>"] = cmp.mapping({
+-- 			i = function(fallback)
+-- 					if cmp.visible() and cmp.get_active_entry() then
+-- 						cmp.confirm({
+-- 							behavior = cmp.ConfirmBehavior.Replace,
+-- 							select = false
+-- 						});
+-- 					else
+-- 						fallback()
+-- 					end
+-- 				end,
+-- 			s = cmp.mapping.confirm({ select = true })
+-- 		}),
+-- 	["<C-u>"] = cmp.mapping.scroll_docs(-3),
+-- 	["<C-d>"] = cmp.mapping.scroll_docs(3),
+-- 	["<C-b>"] = cmp.mapping.scroll_docs(-6),
+-- 	["<C-f>"] = cmp.mapping.scroll_docs(6)
+-- }
+--	table.insert(ax.keymap_categories, ax.format_keymap_desc("Completion", true));
 
 
 

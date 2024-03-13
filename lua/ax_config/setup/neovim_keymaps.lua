@@ -47,7 +47,8 @@ nmap(
 	{ desc = ax.format_keymap_desc("Substitute all occurences of the word under cursor",
 									false, "Text Editing") }
 );                                                                                         -- Substitute all the occurences of the word under the cursor
-nmap(
+map(
+	"x",
 	"<leader>p",
 	"\"_dP",
 	{ desc = ax.format_keymap_desc("Paste without copying replaced text", false,

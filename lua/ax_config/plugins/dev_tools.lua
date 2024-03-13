@@ -7,6 +7,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		name = "mason",
+		cmd = "Mason",
 		config = function()
 			require("mason").setup();
 		end
@@ -16,7 +17,8 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		name = "lspconfig",
-		dependencies = { "cmp", "neodev", "mason_lspconfig" },
+		dependencies = { "cmp_lsp", "mason_lspconfig" },
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			local lspconfig = require("lspconfig");
 			local capabilities = require("cmp_nvim_lsp").default_capabilities();
@@ -32,7 +34,7 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		name = "mason_lspconfig",
-		dependencies = "mason",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			require("mason-lspconfig").setup({
 				automatic_installation = true
@@ -44,7 +46,7 @@ return {
 	{
 		"mfussenegger/nvim-jdtls",
 		name = "jdtls",
-		dependencies = { "lspconfig", "dap" },
+		-- dependencies = { "lspconfig", "dap" },                                          -- Should already be initiated when jdtls hit
 		config = function()
 			if (not ax.should_setup_java) then
 				return
@@ -110,6 +112,7 @@ return {
 		"folke/trouble.nvim",
 		name = "trouble",
 		dependencies = "lspconfig",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			require("trouble").setup({ icons = false });
 		end
@@ -131,14 +134,58 @@ return {
 			{ "L3MON4D3/LuaSnip", name = "luasnip" },
 			{ "saadparwaiz1/cmp_luasnip", name = "cmp_luasnip" },
 		},
+		event = "InsertEnter",
 		config = function()
 			local cmp = require("cmp");
+			local luasnip = require("luasnip");
 
 			cmp.setup({
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body);
 					end
+				},
+
+				mapping = {
+					["<Tab>"] = cmp.mapping(function(fallback)
+							if cmp.visible() then
+								cmp.select_next_item({
+									behavior = cmp.SelectBehavior.Select
+								});
+							elseif luasnip.expand_or_locally_jumpable() then
+								luasnip.expand_or_jump()
+							elseif ax.has_words_before() then
+								cmp.complete()
+							else
+								fallback()
+							end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+							if cmp.visible() then
+								cmp.select_prev_item();
+							elseif luasnip.locally_jumpable(-1) then
+								luasnip.jump(-1)
+							else
+								fallback()
+							end
+					end, { "i", "s" }),
+					["<CR>"] = cmp.mapping({
+							i = function(fallback)
+									if cmp.visible() and cmp.get_active_entry() then
+										cmp.confirm({
+											behavior = cmp.ConfirmBehavior.Replace,
+											select = false
+										});
+									else
+										fallback()
+									end
+								end,
+							s = cmp.mapping.confirm({ select = true })
+						}),
+					["<C-u>"] = cmp.mapping.scroll_docs(-3),
+					["<C-d>"] = cmp.mapping.scroll_docs(3),
+					["<C-b>"] = cmp.mapping.scroll_docs(-6),
+					["<C-f>"] = cmp.mapping.scroll_docs(6)
 				},
 
 					sources = cmp.config.sources({
@@ -148,6 +195,7 @@ return {
 					{ name = "buffer" }
 				})
 			});
+
 		end
 	},
 
@@ -156,6 +204,7 @@ return {
 		"folke/neodev.nvim",
 		name = "neodev",
 		dependencies = "cmp",
+		event = "InsertEnter",
 		config = function()
 			require("neodev").setup({
 				-- TODO: Add the dapui thing
@@ -175,12 +224,12 @@ return {
 		dependencies = {
 			-- List of debuggers
 		},
-		config = function()
-			-- DAP Setups can be found at
-			-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
-
-			local dap = require("dap");
-		end
+		-- config = function()
+		-- 	-- DAP Setups can be found at
+		-- 	-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+		--
+		-- 	local dap = require("dap");
+		-- end
 	},
 
 	-- The debugger UI
@@ -188,6 +237,7 @@ return {
 		"rcarriga/nvim-dap-ui",
 		name = "dap_ui",
 		dependencies = "dap",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			local dap = require("dap");
 			local dapui = require("dapui");
@@ -207,6 +257,7 @@ return {
 	{
 		"theHamsta/nvim-dap-virtual-text",
 		name = "dap_virtual_text",
+		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			---@diagnostic disable-next-line: missing-parameter
 			require("nvim-dap-virtual-text").setup();

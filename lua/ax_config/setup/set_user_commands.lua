@@ -35,8 +35,9 @@ if ax.should_setup_java then
 			local file_name = vim.fn.expand("%:t");
 			local class_name = vim.fn.expand("%:t:r");
 			vim.cmd("terminal");
-			ax.feedkeys("icd " .. dir_path .. "<CR>javac " .. file_name .. "<CR>" ..
-						"java " .. class_name .. "<CR>", "n");
+			ax.feedkeys("iclear<CR>cd " .. dir_path .. "<CR>javac \""  .. file_name ..
+						"\" -d \"" .. dir_path .."\\out<CR>cd " .. dir_path .. "\\out<CR>"
+						.. "java " .. class_name .. "<CR>", "n");
 		end,
 		{}
 	);
