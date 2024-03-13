@@ -40,10 +40,12 @@ return {
 	{
 		"iamcco/markdown-preview.nvim",
 		name = "markdown_preview",
-		build = function() vim.fn["mkdp#util#install"]() end,
+		build = "cd app && yarn install",                                                  -- Need to do this as the packaged installer does build the plugin but then plugin doesn't work
+		-- build = function() vim.fn["mkdp#util#install"]() end,                           -- Doesn't always work
 		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown", "md" }
 	},
 
