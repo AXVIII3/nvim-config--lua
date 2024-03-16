@@ -1,7 +1,5 @@
 -- Plugins for actual development stuff like LSP, Completions and Debugging
 
-local is_jdtls_setup = false;
-
 return {
 	-- Installs LSPs, DAPs, Formatters, etc
 	{
@@ -80,13 +78,9 @@ return {
 				)
 			);
 
-			vim.api.nvim_create_autocmd("BufEnter", {
+			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "*.java",
 				callback = function()
-					if is_jdtls_setup then
-						return
-					end
-
 					print("Wait a sec. Initializing JDTLS");
 					require("jdtls").start_or_attach({
 						cmd = { vim.fn.stdpath("data") .. "\\mason\\bin\\jdtls"..
@@ -101,8 +95,6 @@ return {
 							bundles = bundles
 						}
 					});
-
-					is_jdtls_setup = true;
 				end
 			});
 		end

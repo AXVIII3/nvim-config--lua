@@ -70,5 +70,18 @@ return {
 		name = "current_functions",
 		dependencies = { "treesitter", "telescope" },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" }
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		name = "context",
+		dependencies = "treesitter",
+		config = function()
+			require("treesitter-context").setup({
+				max_lines = 15,
+				multiline_threshold = 10
+			});
+
+			vim.api.nvim_set_hl(0, "TreesitterContext",{ link = "Normal" });
+		end
 	}
 }

@@ -9,6 +9,7 @@ return {
 	},
 
 
+	-- Highlights for special comments
 	{
 		"folke/todo-comments.nvim",
 		name = "todo_comments",
