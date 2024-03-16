@@ -11,6 +11,7 @@ return {
 		end
 	},
 
+
 	-- Quick ready to go configurations for most LSPs
 	{
 		"neovim/nvim-lspconfig",
@@ -28,6 +29,7 @@ return {
 		end
 	},
 
+
 	-- Bridge between mason and lspconfig
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -39,6 +41,7 @@ return {
 			});
 		end
 	},
+
 
 	-- Configuration for JAVA language server (jdtls)
 	{
@@ -78,7 +81,7 @@ return {
 				)
 			);
 
-			vim.api.nvim_create_autocmd("FileType", {
+			vim.api.nvim_create_autocmd("BufReadPost", {
 				pattern = "*.java",
 				callback = function()
 					print("Wait a sec. Initializing JDTLS");
@@ -99,6 +102,7 @@ return {
 			});
 		end
 	},
+
 
 	{
 		"folke/trouble.nvim",
@@ -187,9 +191,9 @@ return {
 					{ name = "buffer" }
 				})
 			});
-
 		end
 	},
+
 
 	-- Neovim config specific completion snippets
 	{
@@ -224,6 +228,7 @@ return {
 		-- end
 	},
 
+
 	-- The debugger UI
 	{
 		"rcarriga/nvim-dap-ui",
@@ -244,6 +249,7 @@ return {
 			end
 		end
 	},
+
 
 	-- Virtual text to show debugging info without opening UI
 	{
