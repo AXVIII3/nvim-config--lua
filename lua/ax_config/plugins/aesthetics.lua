@@ -89,7 +89,7 @@ return {
 					mid  = { "lsp" },
 					right =  {
 						"right_sep", function()
-							return { "StalineFill", " " .. vim.fn.expand("%:t") " " }
+							return { "StalineFill", " " .. vim.fn.expand("%:t") .. " " }
 						end, "left_sep", " ",
 						"right_sep", function()
 							return {

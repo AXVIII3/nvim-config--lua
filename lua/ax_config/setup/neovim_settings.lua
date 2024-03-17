@@ -15,6 +15,7 @@ end
 vim.opt.laststatus = 3;                                                                    -- One global status line for all active windows
 
 -- Utilities
+vim.opt.shell = "pwsh";                                                                    -- Set default shell to powershell
 vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" };                        -- Completion popup style (kinda)
 vim.opt.clipboard = "unnamedplus";                                                         -- Use the system clipboard buffer by default 
 vim.opt.incsearch = true;                                                                  -- Update seach while the search if happening
