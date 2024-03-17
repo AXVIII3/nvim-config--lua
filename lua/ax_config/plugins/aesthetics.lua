@@ -88,7 +88,9 @@ return {
 					left = { " ", "right_sep", "-mode", "left_sep", " ", },
 					mid  = { "lsp" },
 					right =  {
-						"right_sep", "-file_name", "left_sep", " ",
+						"right_sep ", function()
+							return { "StalineFill", vim.fn.expand("%:t") }
+						end, " left_sep", " ",
 						"right_sep", function()
 							return {
 								"StalineFill",
@@ -117,22 +119,22 @@ return {
 					line_column = "L%l:C%c ~ %p%%"
 				},
 				mode_colors = {
-					["n"]  = "#98c379",
-					["c"]  = "#61afef",
-					["i"]  = "#d19a66",
-					["v"]  = "#c678dd",
-					["V"]  = "#9a6dd1",
-					[""] = "#8068de",
-					["R"]  = "#e55561",
+					["n"] = "#98c379", ["c"] = "#61afef", ["i"] = "#d19a66",
+					["v"] = "#c678dd", ["V"] = "#9a6dd1", [""] = "#8068de",
+					["R"] = "#e55561", ['t'] = "#56b6c2",
+
+					['ic'] = "#000000", ['s'] = "#000000", ['S'] = "#000000",
+					['r'] = "#000000"
 				},
 				mode_icons = {
-					["n"]    = "Normal",
-					["i"]    = "Insert",
-					['c']    = "Command",
-					["v"]    = "Visual",
-					["V"]    = "Visual Line",
-					[""]   = "Visual Block",
-					["R"]    = "Replace"
+					["n"] = "Normal", ["i"] = "Insert", ["c"] = "Command",
+					["v"] = "Visual", ["V"] = "Visual Line", [""] = "Visual Block",
+					["R"] = "Replace", ["t"] = "Terminal",
+
+					["no"] = "no", ["niI"] = "niI", ["niR"] = "niR", ["no"] = "no",
+					["niV"] = "niV", ["nov"] = "nov", ["noV"] = "noV", ["ic"] = "ic",
+					["ix"] = "ix", ["s"] = "s", ["S"] = "S", ["r"] = "r", ["r?"] = "r?",
+					["!"] = "!",
 				},
 			});
 

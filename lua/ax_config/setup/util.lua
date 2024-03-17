@@ -99,7 +99,7 @@ _G.ax.change_indent_style = function()
 						ax.feedkeys(":retab<CR>", "n");
 						if ch == "Tabs" then
 							ax.feedkeys(":%s/\\(^\\s*\\)\\@<=" ..
-							(" "):rep(old_indent_width) .. "/\t/g<CR>", "n");
+							(" "):rep(old_indent_width) .. "/\t/g<CR><C-o>", "n");
 							ax.clear_highlights();
 						end
 					end

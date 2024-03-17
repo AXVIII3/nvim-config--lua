@@ -37,13 +37,33 @@ nmap(
 );                                                                                         -- Search for a random string so that the highlighting goes away
 nmap(
 	"<leader>sw",
-	[[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	function()
+	vim.ui.input(
+		{ prompt = "Enter local substitution: " },
+		function(input)
+			if not (input == nil) then
+				ax.feedkeys([[:s/\<<C-r><C-w>\>/]] .. input .. [[/gI<CR><C-o>]], "n");
+				ax.clear_highlights();
+			end
+		end
+	);
+	end,
 	{ desc = ax.format_keymap_desc("Substitute the word under cursor", false,
 									"Text Editing") }
 );                                                                                         -- Substitute the word under the cursor
 nmap(
 	"<leader>sW",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	function()
+	vim.ui.input(
+		{ prompt = "Enter global substitution: " },
+		function(input)
+			if not (input == nil) then
+				ax.feedkeys([[:%s/\<<C-r><C-w>\>/]] .. input .. [[/gI<CR><C-o>]], "n");
+				ax.clear_highlights();
+			end
+		end
+	);
+	end,
 	{ desc = ax.format_keymap_desc("Substitute all occurences of the word under cursor",
 									false, "Text Editing") }
 );                                                                                         -- Substitute all the occurences of the word under the cursor
