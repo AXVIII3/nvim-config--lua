@@ -42,7 +42,7 @@ nmap(
 		{ prompt = "Enter local substitution: " },
 		function(input)
 			if not (input == nil) then
-				ax.feedkeys([[:s/\<<C-r><C-w>\>/]] .. input .. [[/gI<CR><C-o>]], "n");
+				ax.feedkeys([[:s/\<<C-r><C-w>\>/]] .. input .. [[/gI<CR>]], "n");
 				ax.clear_highlights();
 			end
 		end
