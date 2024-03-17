@@ -81,10 +81,9 @@ return {
 				)
 			);
 
-			vim.api.nvim_create_autocmd("BufReadPost", {
+			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "BufNewFile" }, {
 				pattern = "*.java",
 				callback = function()
-					print("Wait a sec. Initializing JDTLS");
 					require("jdtls").start_or_attach({
 						cmd = { vim.fn.stdpath("data") .. "\\mason\\bin\\jdtls"..
 								(vim.fn.has("windows") == 1 and ".cmd" or "") },
