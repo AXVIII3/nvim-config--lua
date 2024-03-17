@@ -55,11 +55,6 @@ map(
 									"Text Editing") }
 );                                                                                         -- Paste without copying the text which is being replaced
 nmap(
-	"<leader>P",
-	"yyp",
-	{ desc = ax.format_keymap_desc("Duplicate down", false, "Text Editing") }
-);                                                                                         -- Copy down to the next line
-nmap(
 	"x",
 	"\"_x",
 	{ desc = ax.format_keymap_desc("Delete word (without copying)", false,
@@ -79,35 +74,11 @@ nmap(
 									"Text Editing") }
 );                                                                                         -- Delete without copying (visual mode)
 nmap(
-	"dW",
-	"bdw",
-	{ desc = ax.format_keymap_desc("Delete the whole word under cursor", false,
-									"Text Editing") }
-);                                                                                         -- Delete word from anywhere inside the word
-nmap(
-	"<leader>dW",
-	"b\"_dw",
-	{ desc = ax.format_keymap_desc("Delete whole word under cursor without copying",
-									false, "Text Editing") }
-);                                                                                         -- Delete word from anywhere inside the word without copying
-nmap(
 	"<leader>D",
 	"\"_D",
 	{ desc = ax.format_keymap_desc("Delete everything after cursor without copying",
 									false, "Text Editing") }
 );                                                                                         -- Delete without copying (everything after cursor)
-nmap(
-	"<leader>o",
-	"o<esc>",
-	{ desc = ax.format_keymap_desc("Create new line below and return to normal mode",
-									false, "Text Editing") }
-);                                                                                         -- Create new line below and return to normal mode
-nmap(
-	"<leader>O",
-	"O<esc>",
-	{ desc = ax.format_keymap_desc("Create new line above and return to normal mode",
-									false, "Text Editing") }
-);                                                                                         -- Create new line above and return to normal mode
 table.insert(ax.keymap_categories, ax.format_keymap_desc("Text Editing", false));
 
 
