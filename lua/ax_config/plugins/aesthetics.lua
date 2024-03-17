@@ -89,7 +89,7 @@ return {
 					mid  = { "lsp" },
 					right =  {
 						"right_sep", function()
-							return { "StalineFill", " " .. vim.fn.expand("%:t") .. " " }
+							return { "StalineFill", " " .. vim.fn.expand("%:t") " " }
 						end, "left_sep", " ",
 						"right_sep", function()
 							return {
@@ -121,7 +121,7 @@ return {
 				mode_colors = {
 					["n"] = "#98c379", ["c"] = "#61afef", ["i"] = "#d19a66",
 					["v"] = "#c678dd", ["V"] = "#9a6dd1", [""] = "#8068de",
-					["R"] = "#e55561", ['t'] = "#56b6c2",
+					["R"] = "#e55561", ['t'] = "#56c8be",
 
 					['ic'] = "#000000", ['s'] = "#000000", ['S'] = "#000000",
 					['r'] = "#000000"
