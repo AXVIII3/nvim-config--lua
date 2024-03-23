@@ -16,15 +16,25 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		name = "lspconfig",
-		dependencies = { "cmp_lsp", "mason_lspconfig" },
+		dependencies = {
+			"cmp_lsp",
+			"mason_lspconfig",
+			{ "folke/neodev.nvim", name = "neodev" }
+		},
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			local lspconfig = require("lspconfig");
 			local capabilities = require("cmp_nvim_lsp").default_capabilities();
 
+			require("neodev").setup();
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
-				settings = { Lua = { diagnostics = { globals = { "vim"  } } } }
+				settings = {
+					Lua = {
+						diagnostics = { globals = { "vim"  } },
+						callSnippet = "Replace"
+					}
+				}
 			});
 		end
 	},
@@ -47,7 +57,6 @@ return {
 	{
 		"mfussenegger/nvim-jdtls",
 		name = "jdtls",
-		-- dependencies = { "lspconfig", "dap" },                                          -- Should already be initiated when jdtls hit
 		config = function()
 			if (not ax.should_setup_java) then
 				return
@@ -150,20 +159,6 @@ return {
 	},
 
 
-	-- Neovim config specific completion snippets
-	{
-		"folke/neodev.nvim",
-		name = "neodev",
-		dependencies = "cmp",
-		event = "InsertEnter",
-		config = function()
-			require("neodev").setup({
-				-- TODO: Add the dapui thing
-			});
-		end
-	},
-
-
 
 
 
@@ -188,7 +183,7 @@ return {
 	{
 		"rcarriga/nvim-dap-ui",
 		name = "dap_ui",
-		dependencies = { "dap", "nvim-neotest/nvim-nio" },
+		dependencies = { "dap", { "nvim-neotest/nvim-nio", name = "nio" } },
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		config = function()
 			local dap = require("dap");
