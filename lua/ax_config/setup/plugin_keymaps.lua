@@ -418,54 +418,73 @@ local set_mappings = function()
 
 
 -- -- Completion
---	local insert_mode_mappings = vim.api.nvim_get_keymap("i");
---	for _, map in pairs(insert_mode_mappings) do
---		if map.lhs == "<Tab>" then
---			print(map.desc)
---	end
-
--- mapping = {
--- 	["<Tab>"] = cmp.mapping(function(fallback)
--- 			if cmp.visible() then
--- 				cmp.select_next_item({
--- 					behavior = cmp.SelectBehavior.Select
--- 				});
--- 			elseif luasnip.expand_or_locally_jumpable() then
--- 				luasnip.expand_or_jump()
--- 			elseif ax.has_words_before() then
--- 				cmp.complete()
--- 			else
--- 				fallback()
--- 			end
--- 	end, { "i", "s" }),
--- 	["<S-Tab>"] = cmp.mapping(function(fallback)
--- 			if cmp.visible() then
--- 				cmp.select_prev_item();
--- 			elseif luasnip.locally_jumpable(-1) then
--- 				luasnip.jump(-1)
--- 			else
--- 				fallback()
--- 			end
--- 	end, { "i", "s" }),
--- 	["<CR>"] = cmp.mapping({
--- 			i = function(fallback)
--- 					if cmp.visible() and cmp.get_active_entry() then
--- 						cmp.confirm({
--- 							behavior = cmp.ConfirmBehavior.Replace,
--- 							select = false
--- 						});
--- 					else
--- 						fallback()
--- 					end
--- 				end,
--- 			s = cmp.mapping.confirm({ select = true })
--- 		}),
--- 	["<C-u>"] = cmp.mapping.scroll_docs(-3),
--- 	["<C-d>"] = cmp.mapping.scroll_docs(3),
--- 	["<C-b>"] = cmp.mapping.scroll_docs(-6),
--- 	["<C-f>"] = cmp.mapping.scroll_docs(6)
--- }
---	table.insert(ax.keymap_categories, ax.format_keymap_desc("Completion", true));
+	local cmp = require("cmp");
+	local luasnip = require("luasnip");
+	map(
+		{ "i", "s" },
+		"<Tab>",
+		function()
+			if cmp.visible() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select });
+			elseif luasnip.expand_or_locally_jumpable() then
+				luasnip.expand_or_jump()
+			elseif ax.has_words_before() then
+				cmp.complete()
+			else
+				ax.feedkeys("<Tab>", "ni");
+			end
+		end,
+		{ desc = ax.format_keymap_desc("Select next suggestion", true, "C.M.P.") }
+	);
+	map(
+		{ "i", "s" },
+		"<S-Tab>",
+		function()
+			if cmp.visible() then
+				cmp.select_prev_item();
+			elseif luasnip.locally_jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				ax.feedkeys("<S-Tab>", "ni");
+			end
+		end,
+		{ desc = ax.format_keymap_desc("Select previous suggestion", true, "C.M.P.") }
+	);
+	map(
+		{ "i", "s" },
+		"<CR>",
+		function()
+			if not cmp.confirm({ select = false }) then
+				ax.feedkeys("<CR>", "ni");
+			end
+		end,
+		{ desc = ax.format_keymap_desc("Enter suffestion", true, "C.M.P.") }
+	);
+	map(
+		"i",
+		"<C-u>",
+		cmp.mapping.scroll_docs(-3),
+		{ desc = ax.format_keymap_desc("Half scroll docs up", true, "C.M.P.") }
+	);
+	map(
+		"i",
+		"<C-d>",
+		cmp.mapping.scroll_docs(3),
+		{ desc = ax.format_keymap_desc("Half scroll docs down", true, "C.M.P.") }
+	);
+	map(
+		"i",
+		"<C-b>",
+		cmp.mapping.scroll_docs(-6),
+		{ desc = ax.format_keymap_desc("Full scroll docs up", true, "C.M.P.") }
+	);
+	map(
+		"i",
+		"<C-u>",
+		cmp.mapping.scroll_docs(6),
+		{ desc = ax.format_keymap_desc("Full scroll docs down", true, "C.M.P.") }
+	);
+	table.insert(ax.keymap_categories, ax.format_keymap_desc("C.M.P.", true));
 
 
 

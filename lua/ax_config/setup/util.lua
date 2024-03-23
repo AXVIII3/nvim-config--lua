@@ -1,11 +1,11 @@
 -- Global function to map key in given mode
-_G.map = function(mode, key, action, opt)
-	vim.keymap.set(mode, key, action, opt);
+_G.map = function(...)
+	vim.keymap.set(...);
 end
 
 -- Global function to map keys in normal mode
-_G.nmap = function(key, action, opt)
-	vim.keymap.set("n", key, action, opt);
+_G.nmap = function(...)
+	vim.keymap.set("n", ...);
 end
 
 -- Global list where plugins or keymap categories can list their names which help in
@@ -126,4 +126,19 @@ _G.ax.toggle_color_column = function()
 		vim.opt.colorcolumn = "0";                                                         -- Turn off vertical line
 		is_column_visible = false;
 	end
+end
+
+_G.ax.join_path = function(...)
+  local segments = { ... }
+  -- TODO: Get different path separator by OS.
+  local sep = '\\'
+  local path = ''
+  for i, segment in ipairs(segments) do
+    if i == 1 then
+      path = segment
+    else
+      path = path .. sep .. segment
+    end
+  end
+  return path
 end
