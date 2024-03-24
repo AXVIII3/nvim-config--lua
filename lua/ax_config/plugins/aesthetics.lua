@@ -43,7 +43,7 @@ return {
 
 			onedark.setup({
 				style = "cool",
-				transparent = true,
+				transparent = ax.should_background_be_transparent,
 				colors = { bg0 = "#1f2229" }
 			});
 
