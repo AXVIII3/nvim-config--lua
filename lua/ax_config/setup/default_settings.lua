@@ -16,6 +16,7 @@ return {
     ]] .. "\n\n\n",                                                                        -- Fun art to show on the dash
 
 	-- Setup Specifix (Can break things if wrong)
+	has_npm_and_yarn = false,                                                              -- Markdown Preview setup is better with this
 	should_setup_vimwiki = false,                                                          -- Setup Vimwiki for easier markdown note taking
 	vimwiki_directory = nil,                                                               -- Absolute path to the wiki directory
 	should_setup_pandoc_command = false,                                                   -- To setup the markdown to pdf pandoc command or not
