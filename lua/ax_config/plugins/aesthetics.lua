@@ -184,7 +184,7 @@ return {
 						{
 							action = "KeymapSearch",
 							desc = " Keymaps" .. (" "):rep(32),
-							icon = "⌨️ ",
+							icon = "🗺️",
 							key = "m"
 						},
 						{
