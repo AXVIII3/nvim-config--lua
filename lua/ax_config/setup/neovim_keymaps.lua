@@ -171,30 +171,6 @@ nmap(
 	{ desc = ax.format_keymap_desc("Toggle color column", false, "Others") }
 );
 
-if ax.should_setup_pandoc_command then
-	nmap(
-		"<leader>mtp",
-		"<cmd>" .. ax.pandoc_command_quick,
-		{ desc = ax.format_keymap_desc("Quick convert md to pdf using pandoc",
-										false, "Others") }
-	);                                                                                     -- Quickly convert markdown to pdf
-	nmap(
-		"<leader>MTP",
-		function()
-		vim.ui.input(
-			{ prompt = "Enter pdf file name: " },
-			function(input)
-				if not (input == nil) then
-					vim.cmd(ax.pandoc_command:gsub("{name}", input));
-				end
-			end
-		);
-		end,
-		{ desc = ax.format_keymap_desc("Convert md to pdf using pandoc", false,
-										"Others") }
-	);                                                                                     -- Convert markdown to pdf and lemme choose a file name for it
-end
-
 nmap(
 	"<leader>in",
 	function() ax.change_indent_style() end,

@@ -24,9 +24,6 @@ return {
 	has_npm_and_yarn = false,                                                              -- Markdown Preview setup is better with this
 	should_setup_vimwiki = false,                                                          -- Setup Vimwiki for easier markdown note taking
 	vimwiki_directory = nil,                                                               -- Absolute path to the wiki directory
-	should_setup_pandoc_command = false,                                                   -- To setup the markdown to pdf pandoc command or not
-	pandoc_command_quick = "",                                                             -- Immediately starts conversion
-	pandoc_command = "",                                                                   -- Waits for file name input
 	should_setup_java = false,                                                             -- To set up java development with jdtls or not
 	undo_files_directory = vim.fn.stdpath("data") .. "undofiles",                          -- The directory where the undo tree persistent files should be stored
 }
