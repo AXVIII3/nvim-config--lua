@@ -14,10 +14,10 @@ set list=css gitignore html ini js json lua log markdown md php py render sass s
 REM This is the batch file which should actually open the file
 set myscript="%~dp0neovim.bat"
 
-REM Create a new file tupe and assciate %myscript% to run it
+REM Create a new file tupe and associate it with %myscropt% via the PowerShell profile of windows terminal 
 echo:
 echo Create a `ftype` called `txtfile` and assign it to run with %myscript%:"
-ftype txtfile=%myscript% "%%1"
+ftype txtfile=wt.exe new-tab -p PowerShell cmd /c "%myscript% \"%%1\""
 
 REM Checking if the txtfile file type is correctly set
 echo:
