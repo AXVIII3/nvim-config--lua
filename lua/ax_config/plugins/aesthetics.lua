@@ -92,13 +92,30 @@ return {
 							return { "StalineFill", " " .. vim.fn.expand("%:t") .. " " }
 						end, "left_sep", " ",
 						"right_sep", function()
+							local width = vim.api.nvim_buf_get_option(0,
+							"shiftwidth");
+
+							if not width then
+								width = vim.api.nvim_buf_get_option(0,
+								"softtabstop");
+							end
+
+							if not width then
+								width = vim.api.nvim_buf_get_option(0,
+								"tapstop");
+							end
+
+							if not width then
+								width = "X"
+							end
+
 							return {
 								"StalineFill",
 								---@diagnostic disable-next-line: undefined-field
-								(vim.opt.expandtab._value and " Spaces" or " Tab" .. ": "
-								.. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " ")
+								(vim.opt.expandtab._value and " Spaces: " or " Tab: ") ..
+								width
 							}
-							end, "left_sep", " ",
+							end, "- ", "left_sep", " ",
 						"right_sep", "-line_column", "left_sep", " "
 					}
 				},
