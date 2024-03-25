@@ -1,48 +1,40 @@
-:: Source - https://stackoverflow.com/questions/62876681/script-to-enable-double-click-a-file-in-explorer-and-launch-run-it-with-a-wsl-ap
-
-
-:: This batch script associates the files in %list% with the `txtfile` type, and
-:: changes the `txtfile` type to open with with %myscrip%.
-:: It does not make it the default app.
-:: One can't programmatically change the default file association of an already
-:: associated filetype in Windows 10 after the first login without the gui,
-:: this is by design for security.
-
 @echo off
-echo !!! THIS SCRIPT MUST BE RUN AS ADMIN !!!
 
-:: === CUSTOM VALUES START =====================================================
+net session >nul 2>&1
+if %errorLevel% == 0 (
+	echo Admin right available. Continuing!
+) else (
+	echo PLEASE RUN AS ADMINISTRATOR
+	goto eof
+)
 
-:: A space separated list of extensions to be associated with the `txtfile` type
+REM The list of file extensions to associate with given script
 set list=css gitignore html ini js json lua log markdown md php py render sass scss template text txt xml java gd cs ps1
 
-:: Set myscript to the double quote filepath of the script to run
-:: %~dp0 is the dir of this script file
-set myscript="%~dp0neovim_file_launcher.bat"
+REM This is the batch file which should actually open the file
+set myscript="%~dp0neovim.bat"
 
-:: === CUSTOM VALUES END =======================================================
-
-:: e.g. require the same as if one typed into cmd: ftype txtfile="C:\current dir\wsl_nvim.bat" "%1"
+REM Create a new file tupe and assciate %myscript% to run it
 echo:
-echo Create a `ftype` called `txtfile` and assign it to run with NVIM:"
+echo Create a `ftype` called `txtfile` and assign it to run with %myscript%:"
 ftype txtfile=%myscript% "%%1"
 
+REM Checking if the txtfile file type is correctly set
 echo:
 echo `ftype` set for `txtfile`, let's check its set:
 ftype | findstr "txtfile"
 
+REM Associate required extensions with created filetype
 echo:
-echo Create a `assoc` between extensions in %list% with `txtfile`
+echo Create a `assoc` between extensions and`txtfile`
 (for %%a in (%list%) do (
    assoc .%%a=txtfile
 ))
 
+REM Chwcking if the associations are succesfully set
 echo:
 echo `assoc` set for each extension, lets check `assoc`:
 assoc | findstr ".txt"
 
-echo:
-echo Now if you right click on one of these file extensions, and select `Open with`,
-echo and select `choose another app`, it should list %myscript% there.
-echo SCRIPT COMPLETE.
-pause
+:eof
+timeout 20
